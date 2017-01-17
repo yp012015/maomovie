@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="dexedLibs">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/bin/dexedLibs/library-99a28b13ecf8d71a966c2641c3718379.jar!/" />
+      <root url="jar://$PROJECT_DIR$/bin/dexedLibs/android-support-v4-860de354b41e7dc4e49004775a2a6982.jar!/" />
+      <root url="jar://$PROJECT_DIR$/bin/dexedLibs/gson-1.7.1-4ebb4730a102ca288442b7e7ced8c4ab.jar!/" />
+      <root url="jar://$PROJECT_DIR$/bin/dexedLibs/ApiStoreSDK1.0.2-2a23610a66bcabd11079710ea395e884.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

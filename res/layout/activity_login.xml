@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="#F5F5F5"
+              android:orientation="vertical"
+              android:fitsSystemWindows="true"
+              android:clipToPadding="false">
+
+    <RelativeLayout
+            android:id="@+id/titleBar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/fragmentHeaderHeight"
+            android:background="@color/color_moviebtn_normal"
+            >
+
+        <ImageButton
+                android:id="@+id/btnBack"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/back"
+                android:background="@drawable/bg_moviebtn"/>
+
+        <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/fragment_header_footor_top_bottom_padding"
+                android:layout_marginBottom="@dimen/fragment_header_footor_top_bottom_padding"
+                android:background="@color/color_moviebtn_pressed"
+                android:layout_alignRight="@id/btnBack"
+                />
+
+        <TextView
+                android:id="@+id/txtTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="用户登录"
+                android:textColor="@color/white"
+                android:textSize="18dp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            >
+        <ImageView
+                android:id="@+id/circleImageView1"
+                android:layout_width="86dp"
+                android:layout_height="66dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/ic_user"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="美团账号登录"
+                android:textColor="@color/gray"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"/>
+    </RelativeLayout>
+
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="match_parent"
+                      android:gravity="center_vertical"
+                      android:layout_marginLeft="20dp"
+                      android:layout_marginRight="20dp"
+                      android:textSize="16sp"
+                      android:text="用户名："/>
+            <EditText
+                    android:id="@+id/etAccount"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="邮箱/手机号/用户名"
+                    android:text="38002019"
+                    android:textSize="16sp"
+                    android:background="@null"
+                    />
+        </LinearLayout>
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="#DDDDDD"
+                />
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="match_parent"
+                      android:gravity="center_vertical"
+                      android:layout_marginLeft="20dp"
+                      android:layout_marginRight="20dp"
+                      android:textSize="16sp"
+                      android:text="密    码："/>
+            <EditText
+                    android:id="@+id/etPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="密码"
+                    android:text="1234"
+                    android:textSize="16sp"
+                    android:background="@null"
+                    android:inputType="textPassword"
+                    />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+            android:id="@+id/tvErrorMsg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/red"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:visibility="invisible"
+            android:text="用户名或密码不能为空"/>
+    
+    <Button
+            android:id="@+id/btnLogin"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_margin="30dp"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:text="登录"
+            android:background="@drawable/btn_login_selector"/>
+
+</LinearLayout>

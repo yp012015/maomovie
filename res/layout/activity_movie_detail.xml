@@ -1,0 +1,548 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:fitsSystemWindows="true"
+                android:clipToPadding="false"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <com.maomovie.view.ObservableScrollView
+            android:id="@+id/myScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbarStyle="insideOverlay"
+            >
+        <!--整个scrollView的容器-->
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <!--灰色部分对的父容器-->
+            <LinearLayout
+                    android:id="@+id/layGradient"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="15dp"
+                    android:paddingLeft="@dimen/fragment_header_footor_left_right_padding"
+                    android:background="@drawable/bg_movie_detail_up"
+                    android:paddingTop="70dp"
+                    android:orientation="vertical">
+                <!--视频+评分的父容器-->
+                <RelativeLayout android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                    <!--视频父容器-->
+                    <RelativeLayout
+                            android:id="@+id/videoLay"
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            android:layout_alignTop="@+id/layDetail"
+                            android:layout_alignBottom="@+id/layDetail"
+                            >
+                        <ImageView
+                                android:id="@+id/imageView1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                />
+                        <ImageButton
+                                android:id="@+id/btnPlay"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_centerInParent="true"
+                                android:background="@drawable/btn_play_selector"
+                                />
+                    </RelativeLayout>
+                    <!--评分父容器-->
+                    <LinearLayout
+                            android:id="@+id/layDetail"
+                            android:layout_toRightOf="@id/videoLay"
+                            android:layout_marginLeft="@dimen/fragment_header_footor_left_right_padding"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                        <TextView
+                                android:id="@+id/tvMovieName_CN"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/white"
+                                android:textSize="18sp"
+                                android:textStyle="bold"
+                                android:text="罗曼蒂克消亡史"/>
+                        <TextView
+                                android:id="@+id/tvMovieName_EN"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/frgmentButtonTextSize"
+                                android:textStyle="bold"
+                                android:layout_marginTop="3dp"
+                                android:text="罗曼蒂克消亡史"/>
+
+                        <LinearLayout android:layout_width="match_parent"
+                                      android:layout_height="wrap_content"
+                                      android:orientation="horizontal">
+
+                            <LinearLayout android:layout_width="0dp"
+                                          android:layout_height="wrap_content"
+                                          android:layout_marginTop="3dp"
+                                          android:layout_weight="1"
+                                          android:orientation="vertical">
+                                <TextView
+                                        android:text="观众评分"
+                                        android:textSize="13sp"
+                                        android:textColor="@color/hologray"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"/>
+                                <TextView
+                                        android:id="@+id/tvScore_viewer"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="20sp"
+                                        android:textColor="#fac201"
+                                        android:text="7.6"
+                                        />
+                            </LinearLayout>
+
+                            <View android:layout_width="1px"
+                                  android:layout_height="match_parent"
+                                  android:layout_margin="10dp"
+                                  android:background="@color/gray"
+                                    />
+                            <LinearLayout android:layout_width="0dp"
+                                          android:layout_height="wrap_content"
+                                          android:layout_marginTop="3dp"
+                                          android:layout_weight="2"
+                                          android:orientation="vertical">
+                                <TextView
+                                        android:text="评分人数"
+                                        android:textSize="13sp"
+                                        android:textColor="@color/hologray"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"/>
+                                <TextView
+                                        android:id="@+id/tvScore_Professional"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="20sp"
+                                        android:textColor="#fac201"
+                                        android:text="7.6"
+                                        />
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+                        <TextView
+                                android:id="@+id/tvMovieType"
+                                android:text="剧情 动作 悬疑"
+                                android:textSize="14sp"
+                                android:textColor="@color/hologray"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+                        <TextView
+                                android:id="@+id/tvMoviePlace"
+                                android:text="剧情 动作 悬疑"
+                                android:layout_marginTop="3dp"
+                                android:textSize="14sp"
+                                android:textColor="@color/hologray"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+                        <TextView
+                                android:id="@+id/tvMovieDate"
+                                android:text="剧情 动作 悬疑"
+                                android:layout_marginTop="3dp"
+                                android:textSize="14sp"
+                                android:textColor="@color/hologray"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <LinearLayout
+                        android:id="@+id/layWish"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/fragment_header_footor_top_bottom_padding"
+                        android:orientation="horizontal">
+
+                    <Button
+                            android:id="@+id/btnWish"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:textSize="16sp"
+                            android:textColor="@color/white"
+                            android:layout_marginTop="15dp"
+                            android:background="@drawable/btn_wish_selector"
+                            android:onClick="onClick"
+                            android:text="想看"/>
+                    <Button
+                            android:id="@+id/btnScore"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:textSize="16sp"
+                            android:textColor="@color/white"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginLeft="10dp"
+                            android:background="@drawable/btn_wish_selector"
+                            android:onClick="onClick"
+                            android:text="评分"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                    android:id="@+id/tvMovieDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:lineSpacingMultiplier="1.5"
+                    android:layout_margin="@dimen/fragment_header_footor_left_right_padding"
+                    />
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:background="@color/hologray"
+                    />
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:layout_margin="@dimen/fragment_header_footor_left_right_padding"
+                        android:text="导演"/>
+                <TextView
+                        android:id="@+id/tvMovieDir"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:gravity="center_vertical"
+                        android:textSize="14sp"
+                        android:text="冯小刚"/>
+            </LinearLayout>
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:layout_margin="@dimen/fragment_header_footor_left_right_padding"
+                    android:text="领衔演员"/>
+            <TextView
+                    android:id="@+id/tvMovieStar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:layout_marginLeft="@dimen/fragment_header_footor_left_right_padding"
+                    android:layout_marginRight="@dimen/fragment_header_footor_left_right_padding"
+                    android:layout_marginBottom="@dimen/fragment_header_footor_left_right_padding"
+                    android:text="冯小刚"/>
+
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:background="@color/hologray"
+                    />
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="@dimen/fragment_header_footor_left_right_padding"
+                    android:gravity="center_vertical"
+                    >
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:textColor="@color/black_gray"
+                        android:text="观众评论"/>
+
+                <View
+                        android:layout_marginTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:background="@color/black_overlay"/>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                    android:layout_margin="@dimen/fragment_header_footor_top_bottom_padding"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                <ImageView
+                        android:id="@+id/ivPhoto1"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/video_default_cat"/>
+                <TextView
+                        android:id="@+id/tvCommentator1"
+                        android:text="xi澳洋"
+                        android:textSize="14sp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_toRightOf="@+id/ivPhoto1"
+                        android:layout_toEndOf="@+id/ivPhoto1"/>
+
+                <RatingBar
+                        android:id="@+id/ratingBar1"
+                        style="@style/RadingStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:numStars="5"
+                        android:rating="4"
+                        android:stepSize="0.5"
+                        android:layout_below="@id/tvCommentator1"
+                        android:layout_toRightOf="@+id/ivPhoto1"
+                        android:layout_toEndOf="@+id/ivPhoto1"/>
+
+                <TextView
+                        android:text="故事不错故事不错故事不错故事不错故事不错故事不错故事不错故事不错故事不错故事不错故事不错"
+                        android:id="@+id/tvComment1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/ivPhoto1"
+                        android:layout_toEndOf="@+id/ivPhoto1"
+                        android:layout_below="@id/ratingBar1"
+                        android:textSize="12sp"
+                        android:layout_margin="5dp"/>
+
+
+            </RelativeLayout>
+            <RelativeLayout
+                    android:layout_margin="@dimen/fragment_header_footor_top_bottom_padding"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                <ImageView
+                        android:id="@+id/ivPhoto2"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/video_default_cat"/>
+                <TextView
+                        android:id="@+id/tvCommentator2"
+                        android:text="xi澳洋"
+                        android:textSize="14sp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_toRightOf="@+id/ivPhoto2"
+                        android:layout_toEndOf="@+id/ivPhoto2"/>
+
+                <RatingBar
+                        android:id="@+id/ratingBar2"
+                        style="@style/RadingStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:numStars="5"
+                        android:rating="3.5"
+                        android:stepSize="0.5"
+                        android:layout_below="@id/tvCommentator2"
+                        android:layout_toRightOf="@+id/ivPhoto2"
+                        android:layout_toEndOf="@+id/ivPhoto2"/>
+
+                <TextView
+                        android:text="故事不错故事不错故事不错故事不错故事不错故事不错故事不错故事不错故事不错故事不错故事不错"
+                        android:id="@+id/tvComment2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/ivPhoto2"
+                        android:layout_toEndOf="@+id/ivPhoto2"
+                        android:layout_below="@id/ratingBar2"
+                        android:textSize="12sp"
+                        android:layout_margin="5dp"/>
+
+
+            </RelativeLayout>
+            <RelativeLayout
+                    android:layout_margin="@dimen/fragment_header_footor_top_bottom_padding"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                <ImageView
+                        android:id="@+id/ivPhoto3"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/video_default_cat"/>
+                <TextView
+                        android:id="@+id/tvCommentator3"
+                        android:text="xi澳洋"
+                        android:textSize="14sp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_toRightOf="@+id/ivPhoto3"
+                        android:layout_toEndOf="@+id/ivPhoto3"/>
+
+                <RatingBar
+                        android:id="@+id/ratingBar3"
+                        style="@style/RadingStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:numStars="5"
+                        android:rating="2.5"
+                        android:stepSize="0.5"
+                        android:layout_below="@id/tvCommentator3"
+                        android:layout_toRightOf="@+id/ivPhoto3"
+                        android:layout_toEndOf="@+id/ivPhoto3"/>
+
+                <TextView
+                        android:text="故事不错故事不错故事不错故事不错故事不错故事不错故事不错故事不错故事不错故事不错故事不错"
+                        android:id="@+id/tvComment3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/ivPhoto3"
+                        android:layout_toEndOf="@+id/ivPhoto3"
+                        android:layout_below="@id/ratingBar3"
+                        android:textSize="12sp"
+                        android:layout_margin="5dp"/>
+
+
+            </RelativeLayout>
+            <RelativeLayout
+                    android:layout_margin="@dimen/fragment_header_footor_top_bottom_padding"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                <ImageView
+                        android:id="@+id/ivPhoto4"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/video_default_cat"/>
+                <TextView
+                        android:id="@+id/tvCommentator4"
+                        android:text="xi澳洋"
+                        android:textSize="14sp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_toRightOf="@+id/ivPhoto4"
+                        android:layout_toEndOf="@+id/ivPhoto4"/>
+
+                <RatingBar
+                        android:id="@+id/ratingBar4"
+                        style="@style/RadingStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:numStars="5"
+                        android:rating="4.5"
+                        android:stepSize="0.5"
+                        android:layout_below="@id/tvCommentator4"
+                        android:layout_toRightOf="@+id/ivPhoto4"
+                        android:layout_toEndOf="@+id/ivPhoto4"/>
+
+                <TextView
+                        android:text="故事不错故事不错故事不错故事不错故事不错故事不错故事不错故事不错故事不错故事不错故事不错"
+                        android:id="@+id/tvComment4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/ivPhoto4"
+                        android:layout_toEndOf="@+id/ivPhoto4"
+                        android:layout_below="@id/ratingBar4"
+                        android:textSize="12sp"
+                        android:layout_margin="5dp"/>
+
+
+            </RelativeLayout>
+            <RelativeLayout
+                    android:layout_margin="@dimen/fragment_header_footor_top_bottom_padding"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                <ImageView
+                        android:id="@+id/ivPhoto5"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/video_default_cat"/>
+                <TextView
+                        android:id="@+id/tvCommentator5"
+                        android:text="xi澳洋"
+                        android:textSize="14sp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_toRightOf="@+id/ivPhoto5"
+                        android:layout_toEndOf="@+id/ivPhoto5"/>
+
+                <RatingBar
+                        android:id="@+id/ratingBar5"
+                        style="@style/RadingStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:numStars="5"
+                        android:rating="3"
+                        android:stepSize="0.5"
+                        android:layout_below="@id/tvCommentator5"
+                        android:layout_toRightOf="@+id/ivPhoto5"
+                        android:layout_toEndOf="@+id/ivPhoto5"/>
+
+                <TextView
+                        android:text="故事不错故事不错故事不错故事不错故事不错故事不错故事不错故事不错故事不错故事不错故事不错"
+                        android:id="@+id/tvComment5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/ivPhoto5"
+                        android:layout_toEndOf="@+id/ivPhoto5"
+                        android:layout_below="@id/ratingBar5"
+                        android:textSize="12sp"
+                        android:layout_margin="5dp"/>
+
+
+            </RelativeLayout>
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/black_gray"/>
+
+            <TextView
+                    android:id="@+id/tvCommentTotal"
+                    android:textSize="18sp"
+                    android:textColor="@color/color_moviebtn_normal"
+                    android:text="查看全部14099条评论"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"/>
+        </LinearLayout>
+    </com.maomovie.view.ObservableScrollView>
+
+    <RelativeLayout
+            android:layout_alignParentTop="true"
+            android:id="@+id/titleBar"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@color/full_transparent">
+
+
+        <ImageButton
+                android:id="@+id/btnBack"
+                android:layout_marginTop="20dp"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/back"
+                android:background="@drawable/bg_backbtn"
+                />
+
+        <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/fragmentHeaderHeight"
+                android:textColor="@color/full_transparent"
+                android:gravity="center"
+                android:textSize="18dp"
+                android:layout_alignTop="@id/btnBack"/>
+
+    </RelativeLayout>
+</RelativeLayout>

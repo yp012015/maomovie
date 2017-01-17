@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta charset="UTF-8">
+		<title>Video视频播放</title>
+		<link rel="stylesheet" type="text/css" href="mui.min.css"/>
+	</head>
+	<body>
+		<div class="mui-content">
+			<video id="video" width="360" controls="controls">
+				当前浏览器不支持 video直接播放，点击这里下载视频： <a href="myvideo.webm">下载视频</a>
+			</video>
+		</div>
+		<script src="mui.min.js">
+			mui.init();
+		</script>
+		<script language="JavaScript">
+			//获取video控件
+			var videoElement = document.getElementById("video");
+			//获取body高宽
+			var height = document.body.offsetHeight;
+			var width = document.body.offsetWidth;
+			mui.alert("高度：" + height + "px<br/> 宽度：" + width + "px");
+//			videoElement.height = height + "px";
+//			videoElement.width = width + "px";
+			//调用Android中自定义的拍照JavaScript接口
+			var videoUrl=window.MyBrowserAPI.getLocationData("从页面传给手机的message");
+			//拿到本地数据,并可以传给手机一些内容，可选
+			videoElement.src = videoUrl;
+			videoElement.poster = videoUrl;
+			mui.alert(videoUrl);
+		</script>
+	</body>
+</html>

@@ -1,0 +1,91 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                android:clipToPadding="true"
+                tools:context="${relativePackage}.${activityClass}">
+
+    <LinearLayout
+            android:id="@+id/movie_llayout1"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:background="@color/color_moviebtn_normal"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+        <LinearLayout
+                android:id="@+id/selectCity"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.2"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:background="@drawable/bg_moviebtn"
+                android:paddingEnd="0dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="0dp"
+                android:paddingStart="10dp">
+
+            <TextView
+                    android:id="@+id/tvCityName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="成都"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/fragmentHeaderTextSize"/>
+
+            <ImageView
+                    android:id="@+id/imageView1"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginLeft="5dp"
+                    android:src="@drawable/ic_arrow_down_white"/>
+        </LinearLayout>
+
+        <TextView
+                android:id="@+id/textView1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:gravity="center"
+                android:text="热映电影"
+                android:textColor="#FFFFFF"
+                android:textSize="@dimen/TitleTextSize"/>
+
+        <LinearLayout
+                android:id="@+id/searchMovie"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/bg_moviebtn"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+            <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/ic_search_white"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- ptr:ptrAnimationStyle="flip"  flip:翻转  rotate:旋转 -->
+    <!-- ptr:ptrShowIndicator="true"  右上角 右下角出现箭头 -->
+
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
+            xmlns:ptr="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/pullToRefresh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/movie_llayout1"
+            ptr:ptrAnimationStyle="flip"
+            ptr:ptrDrawable="@drawable/default_ptr_flip"
+            ptr:ptrHeaderBackground="#383838"
+            ptr:ptrHeaderTextColor="#FFFFFF">
+    </com.handmark.pulltorefresh.library.PullToRefreshListView>
+
+</RelativeLayout>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+   <RelativeLayout
+           android:layout_margin="@dimen/fragment_header_footor_top_bottom_padding"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
+
+           <ImageView
+                   android:id="@+id/ivPhoto1"
+                   android:layout_width="40dp"
+                   android:layout_height="40dp"
+                   android:src="@drawable/video_default_cat"/>
+           <TextView
+                   android:id="@+id/tvCommentator1"
+                   android:textSize="14sp"
+                   android:layout_marginLeft="5dp"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_alignParentTop="true"
+                   android:layout_toRightOf="@+id/ivPhoto1"
+                   android:layout_toEndOf="@+id/ivPhoto1"/>
+
+           <RatingBar
+                   android:id="@+id/ratingBar1"
+                   style="@style/RadingStyle"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:numStars="5"
+                   android:rating="4"
+                   android:stepSize="0.5"
+                   android:layout_below="@id/tvCommentator1"
+                   android:layout_toRightOf="@+id/ivPhoto1"
+                   android:layout_toEndOf="@+id/ivPhoto1"/>
+
+           <TextView
+                   android:id="@+id/tvComment1"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_toRightOf="@+id/ivPhoto1"
+                   android:layout_toEndOf="@+id/ivPhoto1"
+                   android:layout_below="@id/ratingBar1"
+                   android:textSize="12sp"
+                   android:layout_margin="5dp"/>
+
+   </RelativeLayout>
+
+</RelativeLayout>

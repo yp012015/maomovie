@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+        >
+
+    <LinearLayout
+            android:layout_width="100dp"
+            android:background="@color/hologray"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <TextView
+                android:id="@+id/tvFillter1"
+                android:text="行政区"
+                android:textColor="@color/color_text_selected"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="40dp"
+                android:background="@drawable/txt_hologray_white_selector"/>
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/gray"/>
+        <TextView
+                android:id="@+id/tvFillter2"
+                android:text="地铁"
+                android:textColor="@color/black_gray"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="40dp"
+                android:background="@drawable/txt_hologray_white_selector"/>
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/gray"/>
+        <TextView
+                android:id="@+id/tvFillter3"
+                android:text="特殊厅"
+                android:textColor="@color/black_gray"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="40dp"
+                android:background="@drawable/txt_hologray_white_selector"/>
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/gray"/>
+        <TextView
+                android:id="@+id/tvFillter4"
+                android:text="品牌"
+                android:textColor="@color/black_gray"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="40dp"
+                android:background="@drawable/txt_hologray_white_selector"/>
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/gray"/>
+        <TextView
+                android:id="@+id/tvFillter5"
+                android:text="服务"
+                android:textColor="@color/black_gray"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="40dp"
+                android:background="@drawable/txt_hologray_white_selector"/>
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/gray"/>
+
+        <View android:layout_width="match_parent" android:layout_height="100dp"/>
+    </LinearLayout>
+
+    <ListView
+            android:id="@+id/itemListView"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="303dp"
+            android:background="@color/white"
+            android:divider="@null"
+            />
+
+</LinearLayout>

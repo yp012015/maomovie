@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:background="@color/white"
+              android:orientation="vertical"
+              android:fitsSystemWindows="true"
+              android:clipToPadding="false">
+
+    <RelativeLayout
+            android:id="@+id/titleBar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/fragmentHeaderHeight"
+            android:background="@color/color_moviebtn_normal"
+            >
+
+        <ImageButton
+                android:id="@+id/btnBack"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/back"
+                android:background="@drawable/bg_moviebtn"/>
+
+        <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/fragment_header_footor_top_bottom_padding"
+                android:layout_marginBottom="@dimen/fragment_header_footor_top_bottom_padding"
+                android:background="@color/color_moviebtn_pressed"
+                android:layout_alignRight="@id/btnBack"
+                />
+
+        <TextView
+                android:id="@+id/txtTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="消息详情"
+                android:textColor="@color/white"
+                android:textSize="18dp"/>
+    </RelativeLayout>
+
+    <com.maomovie.view.MyProgressBar
+            android:id="@+id/myProgressBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/ProgressBar_Mini"
+            android:progress="0"/>
+
+    <TextView
+            android:id="@+id/tvMsgTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:singleLine="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:text="格林就不雅照道歉"
+            android:visibility="gone"
+            />
+
+
+    <TextView
+            android:id="@+id/tvMsgContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/fragment_header_footor_top_bottom_padding"
+            android:layout_marginLeft="@dimen/fragment_header_footor_left_right_padding"
+            android:layout_marginRight="@dimen/fragment_header_footor_left_right_padding"
+            android:textSize="14sp"
+            android:textColor="@color/black_gray"
+            android:visibility="gone"
+            android:text="      近日，格林就不雅照道歉到底是怎么回事？昨天，格林的社交媒体上突然出现了一张不雅照（格林的私处）。起初，格林在推特上解释称他的社交媒体账号被黑了。但是在之后接受采访时，格林承认他自己点错了手机按钮并发布了那张不雅照，并且公开做出道歉。虽然这次事件已经逐渐平息下来，但是格林在美国队的队友们德马库斯-考辛斯和克雷-汤普森依然拿他开玩笑。"/>
+
+</LinearLayout>

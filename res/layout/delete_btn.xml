@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Button
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:text="删除"
+        android:padding="@dimen/fragment_header_footor_top_bottom_padding"
+        android:textSize="16sp"
+        android:textColor="@android:color/white"
+        android:background="@drawable/bg_moviebtn"/>

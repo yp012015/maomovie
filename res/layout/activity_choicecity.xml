@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:background="@color/white"
+              android:orientation="vertical"
+              android:fitsSystemWindows="true"
+              android:clipToPadding="false">
+
+    <RelativeLayout
+            android:id="@+id/titleBar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/fragmentHeaderHeight"
+            android:background="@color/color_moviebtn_normal"
+            >
+
+        <ImageButton
+                android:id="@+id/btnBack"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/back"
+                android:background="@drawable/bg_moviebtn"/>
+
+        <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/fragment_header_footor_top_bottom_padding"
+                android:layout_marginBottom="@dimen/fragment_header_footor_top_bottom_padding"
+                android:background="@color/color_moviebtn_pressed"
+                android:layout_alignRight="@id/btnBack"
+                />
+
+        <TextView
+                android:id="@+id/txtUserName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="选择城市"
+                android:textColor="@color/white"
+                android:textSize="18dp"/>
+    </RelativeLayout>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
+
+        <com.maomovie.components.listsort.ClearEditText
+                android:id="@+id/filter_edit"
+                android:layout_width="fill_parent"
+                android:layout_height="35dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="5dip"
+                android:background="@drawable/search_bar_edit_selector"
+                android:drawableLeft="@drawable/search_bar_icon_normal"
+                android:hint="请输入关键字"
+                android:singleLine="true"
+                android:textSize="15.0dip"/>
+    </LinearLayout>
+
+    <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginTop="5dp">
+
+        <ListView
+                android:id="@+id/country_lvcountry"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:divider="@null"/>
+
+        <TextView
+                android:id="@+id/titleDialog"
+                android:layout_width="80.0dip"
+                android:layout_height="80.0dip"
+                android:layout_gravity="center"
+                android:background="@color/gray"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textSize="30dp"
+                android:text="没有城市"
+                android:visibility="invisible"/>
+
+        <com.maomovie.components.listsort.SideBar
+                android:id="@+id/sidrbar"
+                android:layout_width="30.0dip"
+                android:layout_height="fill_parent"
+                android:layout_gravity="right|center"/>
+        <ProgressBar
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/progressBar"
+                android:layout_gravity="left|center_vertical"/>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="#88ACACAC"
+                android:id="@+id/txtProgress"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="25dp"
+                android:paddingLeft="50dp"
+                android:text="正在加载数据……"
+                android:gravity="center_vertical"
+                android:layout_gravity="center_vertical"/>
+    </FrameLayout>
+
+</LinearLayout>

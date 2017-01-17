@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:fitsSystemWindows="true"
+              android:clipToPadding="false">
+
+    <LinearLayout
+            android:id="@+id/cinema_llayout1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/fragmentHeaderHeight"
+            android:layout_alignParentTop="true"
+            android:background="@color/color_moviebtn_normal"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+        <ImageButton
+                android:id="@+id/btnBack"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/back"
+                android:background="@drawable/bg_moviebtn"/>
+
+        <View
+                android:id="@+id/topLine"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/fragment_header_footor_top_bottom_padding"
+                android:layout_marginBottom="@dimen/fragment_header_footor_top_bottom_padding"
+                android:background="@color/color_moviebtn_pressed"
+                />
+
+        <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:gravity="center"
+                android:text="影院"
+                android:textColor="#FFFFFF"
+                android:textSize="@dimen/TitleTextSize"
+                android:singleLine="true"/>
+
+        <LinearLayout
+                android:id="@+id/cinemaFilter"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/bg_moviebtn"
+                android:descendantFocusability="blocksDescendants"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+            <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/ic_filter"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/searchMovie"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/bg_moviebtn"
+                android:descendantFocusability="blocksDescendants"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingEnd="7dp"
+                android:paddingLeft="0dp"
+                android:paddingRight="7dp"
+                android:paddingStart="0dp">
+
+            <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/ic_search_white"/>
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:scrollbars="none">
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/hologray">
+            <LinearLayout
+                    android:id="@+id/layFirstDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:orientation="vertical"
+                    >
+
+                <TextView
+                        android:id="@+id/tvFirstDate"
+                        android:layout_width="120dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/color_moviebtn_normal"
+                        android:textSize="14sp"
+                        android:text="今天8月12日"
+                        android:gravity="center_vertical"
+                        android:layout_marginLeft="20dp"/>
+
+                <View
+                        android:id="@+id/lineFirst"
+                        android:layout_width="120dp"
+                        android:layout_height="3dp"
+                        android:layout_marginLeft="10dp"
+                        android:background="@color/color_moviebtn_normal"
+                        />
+
+            </LinearLayout>
+            <LinearLayout
+                    android:id="@+id/laySecondDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:orientation="vertical"
+                    >
+
+                <TextView
+                        android:id="@+id/tvSecondDate"
+                        android:layout_width="120dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/black_gray"
+                        android:textSize="14sp"
+                        android:text="今天8月12日"
+                        android:gravity="center_vertical"
+                        android:layout_marginLeft="20dp"/>
+
+                <View
+                        android:id="@+id/lineSecond"
+                        android:layout_width="120dp"
+                        android:layout_height="3dp"
+                        android:layout_marginLeft="10dp"
+                        android:background="@color/color_moviebtn_normal"
+                        android:visibility="invisible"
+                        />
+
+            </LinearLayout>
+            <LinearLayout
+                    android:id="@+id/layThirdDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:orientation="vertical"
+                    >
+
+                <TextView
+                        android:id="@+id/tvThirdDate"
+                        android:layout_width="120dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/black_gray"
+                        android:textSize="14sp"
+                        android:text="今天8月12日"
+                        android:gravity="center_vertical"
+                        android:layout_marginLeft="20dp"/>
+
+                <View
+                        android:id="@+id/lineThird"
+                        android:layout_width="120dp"
+                        android:layout_height="3dp"
+                        android:layout_marginLeft="10dp"
+                        android:background="@color/color_moviebtn_normal"
+                        android:visibility="invisible"
+                        />
+
+            </LinearLayout>
+            <LinearLayout
+                    android:id="@+id/layFourthDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:orientation="vertical"
+                    >
+
+                <TextView
+                        android:id="@+id/tvFourthDate"
+                        android:layout_width="120dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/black_gray"
+                        android:textSize="14sp"
+                        android:text="今天8月12日"
+                        android:gravity="center_vertical"
+                        android:layout_marginLeft="20dp"/>
+
+                <View
+                        android:id="@+id/lineFourth"
+                        android:layout_width="120dp"
+                        android:layout_height="3dp"
+                        android:layout_marginLeft="10dp"
+                        android:background="@color/color_moviebtn_normal"
+                        android:visibility="invisible"
+                        />
+
+            </LinearLayout>
+            <LinearLayout
+                    android:id="@+id/layFifthDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:orientation="vertical"
+                    >
+
+                <TextView
+                        android:id="@+id/tvFifthDate"
+                        android:layout_width="120dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/black_gray"
+                        android:textSize="14sp"
+                        android:text="今天8月12日"
+                        android:gravity="center_vertical"
+                        android:layout_marginLeft="20dp"/>
+
+                <View
+                        android:id="@+id/lineFifth"
+                        android:layout_width="120dp"
+                        android:layout_height="3dp"
+                        android:layout_marginLeft="10dp"
+                        android:background="@color/color_moviebtn_normal"
+                        android:visibility="invisible"
+                        />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </HorizontalScrollView>
+
+
+    <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+    </ListView>
+
+</LinearLayout>

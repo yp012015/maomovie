@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/disitem_tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:padding="10dp"
+        android:text="无法音乐人献声"
+        android:textColor="#000000"
+        android:textSize="14sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+         >
+
+        <ImageView
+            android:id="@+id/disitem_img1"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:paddingLeft="10dp"
+            android:src="@drawable/movieinfo1" />
+
+        <ImageView
+            android:id="@+id/disitem_img2"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:src="@drawable/movieinfo2" />
+
+        <ImageView
+            android:id="@+id/disitem_img3"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:paddingRight="10dp"
+            android:src="@drawable/movieinfo3" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_gravity="center_vertical"
+        android:padding="10dp" >
+
+        <TextView
+            android:id="@+id/disitem_tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5sp"
+            android:text="12:38" />
+
+        <TextView
+            android:id="@+id/disitem_tvComment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="5dp"
+            android:text="15" />
+
+        <ImageView
+            android:id="@+id/disitem_imgcomment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/disitem_tvComment"
+            android:src="@drawable/discitemcommentbtn_selector" />
+
+        <TextView
+            android:id="@+id/disitem_tvZan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="5dp"
+            android:layout_toLeftOf="@id/disitem_imgcomment"
+            android:text="17" />
+
+        <ImageView
+            android:id="@+id/disitem_imgZan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/disitem_tvZan"
+            android:src="@drawable/discitemzanbtn_selector" />
+    </RelativeLayout>
+
+</LinearLayout>

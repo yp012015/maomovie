@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="color_bg_selected">#e0301e</color>
+    <color name="color_bg_normal">#e7e7e8</color>
+    <color name="color_text_selected">#ff0000</color>
+    <color name="color_text_normal">#271357</color>
+    <color name="color_moviebtn_pressed">#B61F1B</color>
+    <color name="color_moviebtn_normal">#D43E37</color>
+    <color name="color_bg_main_footor">#F5F5F5</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="gray">#969696</color>
+    <color name="red">#ff0000</color>
+    <color name="black_gray">#6F6F6F</color>
+    <color name="titleblue">#297FD5</color>
+    <color name="full_transparent">#00000000</color>
+    <color name="hologray">#EEEEEE</color>
+    <color name="welcome_title">#5477D5</color>
+
+    <color name="biz_audio_progress_bg">#00b2ff</color>
+    <color name="biz_audio_progress_first">#ffffff</color>
+    <color name="biz_audio_progress_second">#6b6666</color>
+
+    <color name="default_bg">#aa000000</color>
+    <color name="select_color">#00b2ff</color>
+    <color name="normal_color">#ffffffff</color>
+    <color name="divider_color">#55504a</color>
+    <!--special color-->
+    <color name="black_a10_color">#1a000000</color>
+
+</resources>

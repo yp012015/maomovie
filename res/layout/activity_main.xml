@@ -1,0 +1,105 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:fitsSystemWindows="true"
+              android:clipToPadding="false"
+              >
+
+    <LinearLayout
+            android:id="@+id/vp_main_container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
+
+        <android.support.v4.view.ViewPager
+                android:id="@+id/vp_main_viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+        </android.support.v4.view.ViewPager>
+    </LinearLayout>
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_above="@+id/linearLayout1"
+            android:background="@android:color/darker_gray"/>
+
+    <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/mainFootorHeight"
+            android:background="@color/color_bg_main_footor"
+            android:gravity="center"
+            android:paddingLeft="@dimen/mainFootor_left_right_padding"
+            android:paddingRight="@dimen/mainFootor_left_right_padding"
+            android:paddingTop="@dimen/mainFootor_top_bottom_padding"
+            android:paddingBottom="@dimen/mainFootor_top_bottom_padding"
+            >
+
+        <RadioGroup
+                android:id="@+id/radioGroup1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+            <RadioButton
+                    android:id="@+id/radioButton0"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:checked="true"
+                    android:drawableTop="@drawable/mainbtn0_backgroundselector"
+                    android:gravity="center"
+                    android:paddingLeft="0dp"
+                    android:text="电影"
+                    android:textColor="@color/color_radiobutton"
+                    android:textSize="@dimen/frgmentButtonTextSize"/>
+
+            <RadioButton
+                    android:id="@+id/radioButton1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:drawableTop="@drawable/mainbtn1_backgroundselector"
+                    android:gravity="center"
+                    android:paddingLeft="0dp"
+                    android:text="影院"
+                    android:textColor="@color/color_radiobutton"
+                    android:textSize="@dimen/frgmentButtonTextSize"/>
+
+            <RadioButton
+                    android:id="@+id/radioButton2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:drawableTop="@drawable/mainbtn2_backgroundselector"
+                    android:gravity="center"
+                    android:paddingLeft="0dp"
+                    android:text="发现"
+                    android:textColor="@color/color_radiobutton"
+                    android:textSize="@dimen/frgmentButtonTextSize"/>
+
+            <RadioButton
+                    android:id="@+id/radioButton3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:drawableTop="@drawable/mainbtn3_backgroundselector"
+                    android:gravity="center"
+                    android:paddingLeft="0dp"
+                    android:text="我的"
+                    android:textColor="@color/color_radiobutton"
+                    android:textSize="@dimen/frgmentButtonTextSize"/>
+        </RadioGroup>
+    </LinearLayout>
+
+</LinearLayout>

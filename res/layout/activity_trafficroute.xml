@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:fitsSystemWindows="true"
+              android:clipToPadding="false"
+              android:background="@color/white"
+        >
+
+    <LinearLayout
+            android:id="@+id/titleBar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/fragmentHeaderHeight"
+            android:orientation="horizontal"
+            android:background="@color/color_bg_main_footor">
+
+        <ImageButton
+                android:id="@+id/btnBack"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:src="@drawable/ic_home_back_dark"
+                android:background="@drawable/homeback_selector"/>
+
+        <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/header_footer_top_bottom_padding"
+                android:layout_marginBottom="@dimen/header_footer_top_bottom_padding"
+                android:background="@color/black_gray"
+                />
+        <View android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"/>
+        <RadioGroup
+                android:id="@+id/radioGroup1"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                >
+
+            <RadioButton
+                    android:id="@+id/radioButton0"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:button="@null"
+                    android:checked="true"
+                    android:drawableLeft="@drawable/map_bus_selector"
+                    android:gravity="center"/>
+            <RadioButton
+                    android:id="@+id/radioButton1"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:button="@null"
+                    android:drawableLeft="@drawable/map_car_selector"/>
+
+        </RadioGroup>
+
+        <View
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_margin="@dimen/fragment_header_footor_top_bottom_padding"
+            android:orientation="horizontal">
+
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_map_route"/>
+
+        <LinearLayout
+                android:layout_marginLeft="15dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+            <TextView
+                    android:id="@+id/tvCurrentAddr"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:textColor="@color/titleblue"
+                    android:text="我的位置"
+                    android:textSize="14sp"
+                    android:gravity="center_vertical"
+                    android:background="@null"/>
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/gray"
+                    android:layout_marginRight="@dimen/fragment_header_footor_top_bottom_padding"
+                    />
+
+            <TextView
+                    android:id="@+id/tvTagAddr"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:textColor="@color/black_gray"
+                    android:textSize="14sp"
+                    android:gravity="center_vertical"
+                    android:background="@null"/>
+
+        </LinearLayout>
+
+        <ImageButton
+                android:id="@+id/btnExchange"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/exchange_selector"/>
+
+    </LinearLayout>
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/gray"/>
+
+    <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
+
+</LinearLayout>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <!-- 颜色渐变效果 -->
+    <gradient
+            android:endColor="#FF6B68"
+            android:startColor="#FF6B68" />
+
+    <!-- 按钮四个角的平滑度 -->
+    <corners android:radius="3dip" />
+
+    <stroke
+            android:dashGap="0dp"
+            android:dashWidth="6dp"
+            android:width="1dp"
+            android:color="#FF6B68" />
+    <!-- 边框线的高度 -->
+    <size android:height="1dp" />
+
+</shape>

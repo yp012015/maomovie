@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component jdk="Android API 19 Platform" jdk_type="Android SDK">
+	<output-test url="file://$MODULE_DIR$/out/test"/>
+	<exclude-output/>
+	<contentEntry url="file://$MODULE_DIR$"/>
+	<lib name="libs" scope="COMPILE">
+		<relative-module-cls project-related="file://$PROJECT_DIR$/../../../../../MaoMovie/libs"/>
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/../../../../../MaoMovie/libs/gson-1.7.1.jar!/"/>
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/../../../../../MaoMovie/libs/android-support-v4.jar!/"/>
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/../../../../../MaoMovie/libs/jpush-android-2.1.7.jar!/"/>
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/../../../../../MaoMovie/libs/systembartint-1.0.4.jar!/"/>
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/../../../../../MaoMovie/libs/AMap_2DMap_V2.9.0_20160525.jar!/"/>
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/../../../../../MaoMovie/libs/AMap_3DMap_V3.4.0_20160809.jar!/"/>
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/../../../../../MaoMovie/libs/AMap_Search_V3.4.0_20160811.jar!/"/>
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/../../../../../MaoMovie/libs/AMap_Location_V2.4.1_20160414.jar!/"/>
+	</lib>
+	<lib name="libs" scope="COMPILE">
+		<relative-module-cls project-related="file://$PROJECT_DIR$/../../../../../MaoMovie/libs"/>
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/../../../../../MaoMovie/libs/gson-1.7.1.jar!/"/>
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/../../../../../MaoMovie/libs/android-support-v4.jar!/"/>
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/../../../../../MaoMovie/libs/jpush-android-2.1.7.jar!/"/>
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/../../../../../MaoMovie/libs/systembartint-1.0.4.jar!/"/>
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/../../../../../MaoMovie/libs/AMap_2DMap_V2.9.0_20160525.jar!/"/>
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/../../../../../MaoMovie/libs/AMap_3DMap_V3.4.0_20160809.jar!/"/>
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/../../../../../MaoMovie/libs/AMap_Search_V3.4.0_20160811.jar!/"/>
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/../../../../../MaoMovie/libs/AMap_Location_V2.4.1_20160414.jar!/"/>
+	</lib>
+</component>

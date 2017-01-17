@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_below="@+id/linearLayout2"
+        android:background="#F1F1F1" xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:text="今天"
+            android:textSize="12sp"/>
+</RelativeLayout>

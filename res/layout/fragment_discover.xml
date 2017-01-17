@@ -1,0 +1,132 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context="${relativePackage}.${activityClass}"
+                android:fitsSystemWindows="true"
+                android:clipToPadding="true">
+
+    <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/fragmentHeaderHeight"
+            android:background="@color/color_moviebtn_normal"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="电影资讯"
+                android:textColor="@color/white"
+                android:textSize="@dimen/TitleTextSize"/>
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_below="@+id/linearLayout1"
+            android:background="@drawable/txt_white_hologray_selector"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+        <LinearLayout
+                android:id="@+id/container_hotMovie"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/txt_white_hologray_selector"
+                android:gravity="center_vertical">
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/ic_news_board"/>
+
+            <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:paddingBottom="@dimen/fragment_header_footor_top_bottom_padding"
+                    android:paddingEnd="0dp"
+                    android:paddingRight="0dp"
+                    android:paddingLeft="10dp"
+                    android:paddingStart="10dp"
+                    android:paddingTop="@dimen/fragment_header_footor_top_bottom_padding">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="热门榜单"
+                        android:textColor="#000000"
+                        android:textSize="16sp"/>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:text="国内外热门电影"
+                        android:textColor="#666666"
+                        android:textSize="12sp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#88E6E6E6"/>
+
+        <LinearLayout
+                android:id="@+id/container_currentTicket"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/txt_white_hologray_selector"
+                android:gravity="center_vertical">
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/ic_news_box"/>
+
+            <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:paddingLeft="10dp">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="事实票房"
+                        android:textColor="#000000"
+                        android:textSize="16sp"/>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:gravity="center"
+                        android:text="票房及排名查询"
+                        android:textColor="#666666"
+                        android:textSize="12sp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ListView
+            android:id="@+id/discover_listView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linearLayout2">
+    </ListView>
+
+</RelativeLayout>

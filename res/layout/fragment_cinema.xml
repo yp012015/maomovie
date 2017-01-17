@@ -1,0 +1,149 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context="${relativePackage}.${activityClass}"
+                android:background="@color/white"
+                android:fitsSystemWindows="true"
+                android:clipToPadding="true">
+
+    <LinearLayout
+            android:id="@+id/cinema_llayout1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/fragmentHeaderHeight"
+            android:layout_alignParentTop="true"
+            android:background="@color/color_moviebtn_normal"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+        <LinearLayout
+                android:id="@+id/selectCity"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.5"
+                android:background="@drawable/bg_moviebtn"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingEnd="0dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="0dp"
+                android:paddingStart="10dp">
+
+            <TextView
+                    android:id="@+id/tvCityName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="成都"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/fragmentHeaderTextSize"/>
+
+            <ImageView
+                    android:id="@+id/imageView1"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginLeft="5dp"
+                    android:src="@drawable/ic_arrow_down_white"/>
+        </LinearLayout>
+
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:gravity="center"
+                android:text="影院"
+                android:textColor="#FFFFFF"
+                android:textSize="@dimen/TitleTextSize"/>
+
+        <LinearLayout
+                android:id="@+id/cinemaFilter"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.2"
+                android:background="@drawable/bg_moviebtn"
+                android:descendantFocusability="blocksDescendants"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+            <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/ic_filter"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/searchMovie"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.2"
+                android:background="@drawable/bg_moviebtn"
+                android:descendantFocusability="blocksDescendants"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingEnd="7dp"
+                android:paddingLeft="0dp"
+                android:paddingRight="7dp"
+                android:paddingStart="0dp">
+
+            <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/ic_search_white"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- ptr:ptrAnimationStyle="flip"  flip:翻转  rotate:旋转 -->
+    <!-- ptr:ptrShowIndicator="true"  右上角 右下角出现箭头 -->
+
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
+            xmlns:ptr="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/cinema_pullListView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@id/cinema_llayout1"
+            ptr:ptrAnimationStyle="flip"
+            ptr:ptrDrawable="@drawable/default_ptr_flip"
+            ptr:ptrHeaderBackground="#383838"
+            ptr:ptrHeaderTextColor="@color/white">
+    </com.handmark.pulltorefresh.library.PullToRefreshListView>
+
+    <LinearLayout
+            android:id="@+id/container_location"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/layout_cinemalocation_bg"
+            android:gravity="center_vertical"
+            android:focusable="true"
+            android:orientation="horizontal">
+
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="16dp"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/ic_cinema_locate"/>
+
+        <TextView
+                android:id="@+id/tvCurrntAddress"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:paddingLeft="5dp"
+                android:text="正在定位，请稍后……"/>
+
+        <ImageView
+                android:id="@+id/cinemaImg_locationRefresh"
+                android:layout_marginRight="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="16dp"
+                android:src="@drawable/ic_cinema_locate_refresh"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
