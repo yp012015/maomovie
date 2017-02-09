@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import com.maomovie.R;
@@ -18,10 +19,16 @@ import org.json.JSONObject;
 public class CommentAdapter extends BaseAdapter {
     private Context context;
     private JSONArray dataArray;
+    private ClickImageCallBack callBack;
 
-    public CommentAdapter(Context context, JSONArray dataArray) {
+    public interface ClickImageCallBack {
+        void clickImage(String avatarUrl);
+    }
+
+    public CommentAdapter(Context context, JSONArray dataArray,ClickImageCallBack callBack) {
         this.context = context;
         this.dataArray = dataArray;
+        this.callBack = callBack;
     }
 
     @Override
@@ -51,6 +58,18 @@ public class CommentAdapter extends BaseAdapter {
         TextView tvContent = ViewHolder.get(convertView,R.id.tvComment1);
         //评分
         RatingBar ratingBar = ViewHolder.get(convertView,R.id.ratingBar1);
+        ImageView imageView = ViewHolder.get(convertView,R.id.ivPhoto1);
+        final String avatarUrl = commentJsonObj.optString("avatarurl");
+        imageView.setTag(avatarUrl);
+        //这句代码的作用是为了解决convertView被重用的时候，图片预设的问题
+        imageView.setImageResource(R.drawable.default_avatar);
+        //点击图片监听器
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callBack.clickImage(avatarUrl);
+            }
+        });
         tvNickname.setText(commentJsonObj.optString("nickName"));
         tvContent.setText(commentJsonObj.optString("content"));
         ratingBar.setRating((float) commentJsonObj.optDouble("score"));

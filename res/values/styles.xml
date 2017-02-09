@@ -66,4 +66,13 @@
         <item name="android:layout_height">match_parent</item>
     </style>
 
+    <!--自定义等待加载的菊花圈-->
+    <style name="loading_progressbar" >
+        　　<item name="android:indeterminateDrawable">@drawable/progress_large</item>
+        　　<item name="android:minWidth">76dip</item>
+        　　<item name="android:maxWidth">76dip</item>
+        　　<item name="android:minHeight">76dip</item>
+        　　<item name="android:maxHeight">76dip</item>
+    </style>
+
 </resources>

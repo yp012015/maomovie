@@ -12,7 +12,7 @@
                    android:id="@+id/ivPhoto1"
                    android:layout_width="40dp"
                    android:layout_height="40dp"
-                   android:src="@drawable/video_default_cat"/>
+                   android:src="@drawable/default_avatar"/>
            <TextView
                    android:id="@+id/tvCommentator1"
                    android:textSize="14sp"
@@ -27,7 +27,7 @@
                    android:id="@+id/ratingBar1"
                    style="@style/RadingStyle"
                    android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
+                   android:layout_height="20dp"
                    android:numStars="5"
                    android:rating="4"
                    android:stepSize="0.5"

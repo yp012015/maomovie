@@ -192,12 +192,32 @@ public class HttpUtil {
 
     /**
      * 7.查出电影详情(包含评论)
-     * @param movidId
+     * @param movieId
      * @return
      */
-    public static Object getMovieDetailById(int movidId){
+    public static Object getMovieDetailById(int movieId){
         String url = "http://m.maoyan.com/movie/{movieId}.json";
-        url = url.replace("{movieId}",String.valueOf(movidId));
+        url = url.replace("{movieId}",String.valueOf(movieId));
+        try {
+            return net(url,null,"GET");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return e;
+        }
+    }
+
+    /**
+     *
+     * @param movieId   电影id
+     * @param limit     每页查询条数
+     * @param offset    查询第几页
+     * @return
+     */
+    public static Object getCommentsJson(int movieId,int limit,int offset){
+        String url = "http://m.maoyan.com/comments.json?movieid={movieId}&limit={limit}&offset={offset}";
+        url = url.replace("{movieId}",String.valueOf(movieId));
+        url = url.replace("{limit}",String.valueOf(limit));
+        url = url.replace("{offset}",String.valueOf(offset));
         try {
             return net(url,null,"GET");
         } catch (Exception e) {

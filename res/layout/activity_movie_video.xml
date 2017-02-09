@@ -4,8 +4,7 @@
               android:layout_height="match_parent"
               android:background="@color/white"
               android:orientation="vertical"
-              android:fitsSystemWindows="true"
-              android:clipToPadding="false">
+        >
 
         <FrameLayout
                 android:layout_width="match_parent"
@@ -32,142 +31,71 @@
         <TextView
                 android:id="@+id/tvErrorMsg"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="300dp"
                 android:layout_centerInParent="true"
-                android:text=" 未找到该电影的预告片"
-                android:textSize="16sp"
+                android:text=" 网络不给力，获取电影预告片失败"
+                android:textSize="12sp"
+                android:textColor="@color/color_moviebtn_normal"
+                android:textStyle="bold"
                 android:visibility="gone"
                 />
 
-        <LinearLayout
-                android:orientation="vertical"
+        <RelativeLayout
+                android:id="@+id/layProgress"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <LinearLayout
-                        android:id="@+id/item_movie_lay"
+                android:layout_height="1000dp">
+                <ProgressBar
+                        android:layout_marginTop="100dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:background="@color/white"
-                        android:padding="5dp">
+                        android:layout_gravity="center_horizontal|top"
+                        style="@style/loading_progressbar"/>
+        </RelativeLayout>
 
-                        <ImageView
-                                android:id="@+id/moviePhoto"
-                                android:layout_width="45dp"
-                                android:layout_height="70dp"
-                                android:src="@drawable/cartoon_list_item_default"/>
+        <!-- ptr:ptrAnimationStyle="flip"  flip:翻转  rotate:旋转 -->
+        <!-- ptr:ptrShowIndicator="true"  右上角 右下角出现箭头 -->
 
-                        <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:gravity="center_vertical"
-                                android:orientation="vertical"
-                                android:paddingLeft="8dp"
-                                android:paddingRight="8dp">
-
-                                <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="0dp"
-                                        android:layout_weight="1"
-                                        android:gravity="center_vertical"
-                                        android:orientation="horizontal">
-
-                                        <TextView
-                                                android:id="@+id/title"
-                                                android:layout_width="0dp"
-                                                android:layout_weight="1"
-                                                android:singleLine="true"
-                                                android:layout_height="wrap_content"
-                                                android:text="火星救援"
-                                                android:textColor="#000000"
-                                                android:textSize="18sp"/>
-
-                                        <TextView
-                                                android:id="@+id/tvSc"
-                                                android:layout_width="wrap_content"
-                                                android:layout_height="wrap_content"
-                                                android:textColor="#FF9A01"
-                                                android:textSize="18sp"
-                                                android:text="8.9"/>
-                                        <TextView
-                                                android:id="@+id/icMark"
-                                                android:layout_width="wrap_content"
-                                                android:layout_height="wrap_content"
-                                                android:textColor="#FF9A01"
-                                                android:textSize="12sp"
-                                                android:text="分"/>
-
-                                </LinearLayout>
-
-                                <LinearLayout
-                                        android:layout_height="0dp"
-                                        android:layout_weight="1"
-                                        android:layout_width="match_parent"
-                                        android:orientation="horizontal"
-                                        >
-                                        <TextView
-                                                android:id="@+id/tvRt"
-                                                android:layout_width="0dp"
-                                                android:layout_weight="1"
-                                                android:layout_height="wrap_content"
-                                                android:singleLine="true"
-                                                android:text="今天99家影院放映1293场"
-                                                android:textColor="#444444"
-                                                android:textSize="12.0sp"/>
-
-                                        <Button
-                                                android:id="@+id/btn_BuyTicket"
-                                                android:layout_width="40dp"
-                                                android:layout_height="25dp"
-                                                android:background="@drawable/btn_buyticket_bg"
-                                                android:textColor="@color/color_buyticketbtn"
-                                                android:text="购票"
-                                                android:textSize="12sp"
-                                                />
-
-                                </LinearLayout>
-
-                        </LinearLayout>
-
-                </LinearLayout>
-
-                <View
-                        android:layout_width="match_parent"
-                        android:layout_height="20dp"
-                        android:background="@color/hologray"/>
-                <TextView
-                        android:id="@+id/tvCommentTotal"
-                        android:textColor="#f57067"
-                        android:textSize="18sp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginLeft="50dp"
-                        android:text="评论(0)"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-
-                <View
-                        android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:background="@color/color_moviebtn_normal"/>
-                <!-- ptr:ptrAnimationStyle="flip"  flip:翻转  rotate:旋转 -->
-                <!-- ptr:ptrShowIndicator="true"  右上角 右下角出现箭头 -->
-
+        <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                 >
                 <com.handmark.pulltorefresh.library.PullToRefreshListView
                         xmlns:ptr="http://schemas.android.com/apk/res-auto"
                         android:id="@+id/pullToRefresh"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:divider="@color/full_transparent"
                         ptr:ptrAnimationStyle="flip"
                         ptr:ptrDrawable="@drawable/default_ptr_flip"
                         ptr:ptrHeaderBackground="#383838"
                         ptr:ptrHeaderTextColor="#FFFFFF">
                 </com.handmark.pulltorefresh.library.PullToRefreshListView>
-        </LinearLayout>
+
+                <!--ListView头部悬浮的部分-->
+                <LinearLayout
+                        android:id="@+id/layCommentTotal"
+                        android:visibility="gone"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:background="@color/white"
+                        android:orientation="vertical">
+                        <TextView
+                                android:id="@+id/tvCommentTotal"
+                                android:textColor="#f57067"
+                                android:textSize="18sp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="10dp"
+                                android:layout_marginLeft="50dp"
+                                android:text="评论(5)"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+
+                        <View
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@color/color_moviebtn_normal"/>
+                </LinearLayout>
+        </FrameLayout>
 </LinearLayout>

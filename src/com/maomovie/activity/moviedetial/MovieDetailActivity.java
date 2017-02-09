@@ -13,6 +13,7 @@ import android.os.Handler;
 import android.view.*;
 import android.widget.*;
 import com.maomovie.R;
+import com.maomovie.activity.GalleryActivity;
 import com.maomovie.activity.playvideo.MovieVideoActivity;
 import com.maomovie.activity.login.LoginActivity;
 import com.maomovie.entity.TodayMovieEntity;
@@ -68,6 +69,7 @@ public class MovieDetailActivity extends Activity implements View.OnClickListene
     private JSONObject jsonResult;          //电影描述及评分的Json
     private JSONArray commentJsonArray;
     private Bitmap bitmap;                  //电影海报
+    private String[] avatarUrls;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -267,7 +269,7 @@ public class MovieDetailActivity extends Activity implements View.OnClickListene
                 TextView tvCommentTotal = (TextView) findViewById(R.id.tvCommentTotal);//评论总条数
                 tvCommentTotal.setText("查看全部" + commentJsonObj.optInt("total") + "条评论");
                 commentJsonArray = commentJsonObj.optJSONArray("cmts");
-                String[] avatarUrls = new String[commentJsonArray.length()];
+                avatarUrls = new String[commentJsonArray.length()];
                 for(int i=0; i<commentJsonArray.length(); i++){
                     commentJsonObj = commentJsonArray.optJSONObject(i);
                     tvCommentators[i].setText(commentJsonObj.optString("nickName"));
@@ -330,7 +332,9 @@ public class MovieDetailActivity extends Activity implements View.OnClickListene
             intent.putExtra("sc",entity.getSc());
             intent.putExtra("rt",entity.getRt());
             intent.putExtra("img",bitmap);
-            intent.putExtra("commentData", commentJsonArray.toString());
+//            if (commentJsonArray != null) {
+//                intent.putExtra("commentData", commentJsonArray.toString());
+//            }
             startActivity(intent);
         } else if(v.getId() == R.id.btnWish){//想看
             ToastUtil.show(context,"共有" + entity.getWish() + "想看这部电影！");
@@ -338,7 +342,28 @@ public class MovieDetailActivity extends Activity implements View.OnClickListene
             Intent intent = new Intent(context, LoginActivity.class);
             startActivity(intent);
         } else {
-            ToastUtil.show(context,"我也觉得这个妹纸好看，给自己留点幻想吧！");
+            int currentIndex = 1;
+            switch (v.getId()){
+                case R.id.ivPhoto1:
+                    currentIndex = 0;
+                    break;
+                case R.id.ivPhoto2:
+                    currentIndex = 1;
+                    break;
+                case R.id.ivPhoto3:
+                    currentIndex = 2;
+                    break;
+                case R.id.ivPhoto4:
+                    currentIndex = 3;
+                    break;
+                case R.id.ivPhoto5:
+                    currentIndex = 4;
+                    break;
+            }
+            Intent intent = new Intent(context, GalleryActivity.class);
+            intent.putExtra("imgUrls", avatarUrls);
+            intent.putExtra("currentIndex",currentIndex);
+            startActivity(intent);
         }
     }
 

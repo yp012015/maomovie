@@ -32,14 +32,13 @@ import com.maomovie.presenter.movieFragment.MovieFragBizPresenter;
 import com.maomovie.service.LoadingDialog;
 import com.maomovie.util.GsonUtils;
 import com.maomovie.util.ImageDownloader;
+import com.maomovie.util.LoadImageUtil;
 import com.maomovie.util.OnImageDownload;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class MovieFragment extends Fragment implements View.OnClickListener ,FragmentMovieAdapter.Callback,MovieFragView{
 
@@ -56,8 +55,6 @@ public class MovieFragment extends Fragment implements View.OnClickListener ,Fra
     private int totalPage = -1;//数据总页数
     private boolean hasNext = true;//标记是否还有下一页
     private MovieFragBizInterface movieFragBiz;
-
-    private Map<String,Bitmap> bitmapHashMap = new HashMap<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -109,7 +106,8 @@ public class MovieFragment extends Fragment implements View.OnClickListener ,Fra
         adapter = new FragmentMovieAdapter(getActivity(),todayMovies,this);
         pullToRefresh.setAdapter(adapter);
         /*
-		 * Mode.BOTH：同时支持上拉下拉 Mode.PULL_FROM_START：只支持下拉Pulling Down
+		 * Mode.BOTH：同时支持上拉下拉
+		 * Mode.PULL_FROM_START：只支持下拉Pulling Down
 		 * Mode.PULL_FROM_END：只支持上拉Pulling Up
 		 */
 		/*
@@ -164,13 +162,13 @@ public class MovieFragment extends Fragment implements View.OnClickListener ,Fra
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
                 //因为pullToRefresh有上拉刷新和下拉刷新，所有可见的item会在头部和尾部各多出一个
-                for (int i = 1; i < visibleItemCount && todayMovies.size() > 0; i++) {
+                for (int i = 1; i <= visibleItemCount && todayMovies.size() > 0; i++) {
                     // 获取到item的电影剧照
-                    int position = firstVisibleItem + i - 1;
+                    int position = firstVisibleItem == 0 ? (firstVisibleItem+i-1):(firstVisibleItem+i-2);
                     if (position == totalItemCount - 2)
                         return;//如果用户已经滑动到最后一个item，即pullToRefresh的尾部，表示数据已加载完毕
                     String picUrl = todayMovies.get(position).getImg();
-                    ImageView iv_show = (ImageView) pullToRefresh.findViewWithTag(picUrl);
+                    ImageView iv_show = (ImageView) view.findViewWithTag(picUrl);
                     Log.i("Tag", "iv_show---" + iv_show);
                     if (mDownloader == null) {
                         mDownloader = new ImageDownloader();
@@ -182,17 +180,13 @@ public class MovieFragment extends Fragment implements View.OnClickListener ,Fra
                     if (ivTag == null) {
                         return;
                     }
-                    Bitmap bitmap = bitmapHashMap.get(ivTag);
-                    if (bitmap != null) {
-                        iv_show.setImageBitmap(bitmap);
-                    } else if (mDownloader != null) {
+                    if (mDownloader != null) {
                         // 异步下载图片
-                        mDownloader.imageDownload(picUrl, iv_show, "/maomovie", getActivity(),
+                        mDownloader.imageDownload(picUrl, iv_show, "/maomovie/cache/movieImg/", getActivity(),
                                 new OnImageDownload() {
                                     @Override
                                     public void onDownloadSucc(Bitmap bitmap, String c_url, ImageView mimageView) {
-                                        mimageView.setImageBitmap(bitmap);
-                                        bitmapHashMap.put(c_url, bitmap);
+                                        LoadImageUtil.setImageByImageView(mimageView, bitmap);
                                     }
                                 });
                     }
@@ -252,9 +246,8 @@ public class MovieFragment extends Fragment implements View.OnClickListener ,Fra
      */
     @Override
     public void click(View v, int position) {
-
         TodayMovieEntity movieEntity = todayMovies.get(position);
-        Bitmap bitmap = bitmapHashMap.get(movieEntity.getImg());
+        Bitmap bitmap = null;
         Intent intent = new Intent();
         intent.putExtra("movieId",movieEntity.getId());
         intent.putExtra("movieName",movieEntity.getNm());
@@ -266,14 +259,21 @@ public class MovieFragment extends Fragment implements View.OnClickListener ,Fra
             case R.id.moviePhoto://预告片
                 intent.putExtra("sc",movieEntity.getSc());
                 intent.putExtra("rt",movieEntity.getRt());
+                v.setDrawingCacheEnabled(true);
+                bitmap = v.getDrawingCache();
                 intent.putExtra("img",bitmap);
                 intent.setClass(getActivity(), MovieVideoActivity.class);
                 startActivity(intent);
+                v.setDrawingCacheEnabled(false);//清空画图缓冲区
                 break;
             case R.id.item_movie_lay:
+                View imageView = v.findViewById(R.id.moviePhoto);
+                imageView.setDrawingCacheEnabled(true);
+                bitmap = imageView.getDrawingCache();
                 intent.putExtra("img",bitmap);
                 intent.setClass(getActivity(),MovieDetailActivity.class);
                 startActivity(intent);
+                imageView.setDrawingCacheEnabled(false);//清空画图缓冲区
                 break;
         }
     }
@@ -320,8 +320,12 @@ public class MovieFragment extends Fragment implements View.OnClickListener ,Fra
             case 201://加载更多电影信息成功
                 pageIndex++;
                 List<TodayMovieEntity> list = (List<TodayMovieEntity>) result;
-                todayMovies.addAll(list);
-                adapter.notifyDataSetChanged();
+                if (list.size() > 0) {//如果加载到更多电影信息
+                    todayMovies.addAll(list);
+                    adapter.notifyDataSetChanged();
+                } else {
+                    pullToRefresh.setPullToRefreshOverScrollEnabled(false);
+                }
                 pullToRefresh.onRefreshComplete();
                 break;
             case 400://从数据库查询第一页电影信息失败

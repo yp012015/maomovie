@@ -34,6 +34,9 @@ public class ImageDownloader {
 	 */
 	public void imageDownload(String url, ImageView mImageView, String path, Activity mActivity,OnImageDownload download) {
 		SoftReference<Bitmap> currBitmap = imageCaches.get(url);
+//		int height = mImageView.getHeight();
+//		int width = mImageView.getWidth();
+//		ToastUtil.show(mActivity.getApplicationContext(),"高度：" + height + "宽度：" + width );
 		Bitmap softRefBitmap = null;
 		if (currBitmap != null) {
 			softRefBitmap = currBitmap.get();
@@ -45,11 +48,11 @@ public class ImageDownloader {
 		Bitmap bitmap = getBitmapFromFile(mActivity, imageName, path);
 		// 先从软引用中拿数据
 		if (currBitmap != null && mImageView != null && softRefBitmap != null && url.equals(mImageView.getTag())) {
-			mImageView.setImageBitmap(softRefBitmap);
+			LoadImageUtil.setImageByImageView(mImageView, softRefBitmap);
 		}
 		// 软引用中没有，从文件中拿数据
 		else if (bitmap != null && mImageView != null && url.equals(mImageView.getTag())) {
-			mImageView.setImageBitmap(bitmap);
+			LoadImageUtil.setImageByImageView(mImageView, bitmap);
 		}
 		// 文件中也没有，此时根据mImageView的tag，即url去判断该url对应的task是否已经在执行，如果在执行，本次操作不创建新的线程，否则创建新的线程。
 		else if (url != null && needCreateNewTask(mImageView)) {
@@ -95,7 +98,10 @@ public class ImageDownloader {
 					if (!setBitmapToFile(path, myActivity, imageName, data)) {
 						removeBitmapFromFile(path, myActivity, imageName);
 					}
-					imageCaches.put(url, new SoftReference<Bitmap>(data.createScaledBitmap(data, 100, 100, true)));
+					if(imageName.contains("avatar") || imageName.endsWith("__40465654__9539763.png"))
+						imageCaches.put(url, new SoftReference<Bitmap>(data.createScaledBitmap(data, 50, 50, true)));
+					else
+						imageCaches.put(url, new SoftReference<Bitmap>(data.createScaledBitmap(data, 41, 60, true)));
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -172,6 +178,8 @@ public class ImageDownloader {
 	 * @return
 	 */
 	private Bitmap getBitmapFromFile(Activity mActivity, String imageName, String path) {
+		int start = imageName.lastIndexOf("/")+1;
+		imageName = imageName.substring(start);
 		Bitmap bitmap = null;
 		if (imageName != null) {
 			File file = null;
@@ -208,6 +216,11 @@ public class ImageDownloader {
 	private boolean setBitmapToFile(String path, Activity mActivity, String imageName, Bitmap bitmap) {
 		File file = null;
 		String real_path = "";
+//		if(imageName.contains("avatar")){//如果是评论用户的头像，不需要保存到本地
+//			return false;
+//		}
+		int start = imageName.lastIndexOf("/")+1;
+		imageName = imageName.substring(start);
 		try {
 			if (GetPicName.getInstance().hasSDCard()) {
 				real_path = GetPicName.getInstance().getExtPath()
@@ -270,24 +283,4 @@ public class ImageDownloader {
 			e.printStackTrace();
 		}
 	}
-
-	/**
-	 * 保存文件
-	 * @param bm
-	 * @param fileName
-	 * @throws IOException
-	 */
-	/*public void saveFile(Bitmap bm, String fileName) throws IOException {
-		String path = getSDPath() +"/revoeye/";
-		File dirFile = new File(path);
-		if(!dirFile.exists()){
-			dirFile.mkdir();
-		}
-		File myCaptureFile = new File(path + fileName);
-		BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(myCaptureFile));
-		bm.compress(Bitmap.CompressFormat.JPEG, 80, bos);
-		bos.flush();
-		bos.close();
-	}*/
-
 }

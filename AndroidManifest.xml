@@ -72,6 +72,7 @@
         </activity>
         <activity android:name=".activity.ChoiceCityAcvitity"
                   android:windowSoftInputMode="adjustPan"
+                  android:screenOrientation="portrait"
                   android:label="@string/app_name">
         </activity>
 
@@ -125,6 +126,7 @@
         <activity
                 android:name="cn.jpush.android.ui.PushActivity"
                 android:configChanges="orientation|keyboardHidden"
+                android:screenOrientation="portrait"
                 android:exported="false">
             <intent-filter>
                 <action android:name="cn.jpush.android.ui.PushActivity"/>
@@ -132,19 +134,21 @@
                 <category android:name="com.maomovie"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activity.MsgActivity"/>
-        <activity android:name=".activity.MoviesOfCinemaActivity"/>
-        <activity android:name=".activity.MovieTheaterActivity"/>
-        <activity android:name=".activity.route.ShowMapActivity"/>
-        <activity android:name=".activity.route.TrafficRouteActivity"/>
-        <activity android:name=".activity.route.BusRouteDetailActivity"/>
-        <activity android:name=".activity.login.LoginActivity"/>
-        <activity android:name=".activity.UserInfoActivity"/>
+        <activity android:name=".activity.MsgActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.MoviesOfCinemaActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.MovieTheaterActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.route.ShowMapActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.route.TrafficRouteActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.route.BusRouteDetailActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.login.LoginActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.UserInfoActivity" android:screenOrientation="portrait"/>
         <activity android:name=".activity.playvideo.MovieVideoActivity"
                   android:configChanges="orientation|keyboardHidden|screenSize"
                   android:label="@string/app_name"
-                  android:screenOrientation="portrait"/>
-        <activity android:name=".activity.moviedetial.MovieDetailActivity"/>
+                  />
+        <activity android:name=".activity.GalleryActivity"
+                android:screenOrientation="portrait"/>
+        <activity android:name=".activity.moviedetial.MovieDetailActivity" android:screenOrientation="portrait"/>
         <!-- Required SDK核心功能-->
         <service
                 android:name="cn.jpush.android.service.DownloadService"
