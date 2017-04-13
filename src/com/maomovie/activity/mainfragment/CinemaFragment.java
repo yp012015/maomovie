@@ -5,11 +5,13 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.*;
 import android.widget.*;
 import android.widget.AbsListView.OnScrollListener;
@@ -43,6 +45,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class CinemaFragment extends Fragment implements View.OnClickListener,
@@ -69,8 +72,10 @@ public class CinemaFragment extends Fragment implements View.OnClickListener,
     private RefreshCityRecevier receiver = new RefreshCityRecevier();
     private CinemaService cinemaService = new CinemaService();
     private ThreadHelper threadHelper = new ThreadHelper(new Handler());
+    public static JSONObject resultJSON;
     //声明行政区域数据源
     public static List<CityEntity.AreasBean> areaList = new ArrayList<CityEntity.AreasBean>();
+    private ListView itemListView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -173,7 +178,7 @@ public class CinemaFragment extends Fragment implements View.OnClickListener,
                         public void run() {
                             pullToRefresh.onRefreshComplete();
                         }
-                    },1000);
+                    }, 1000);
                 }
                 containerLocation.setVisibility(View.GONE);
             }
@@ -309,7 +314,7 @@ public class CinemaFragment extends Fragment implements View.OnClickListener,
         // 这个是为了点击“返回Back”也能使其消失，并且并不会影响你的背景；使用该方法点击窗体之外，才可关闭窗体
         popupWindow.setBackgroundDrawable(new BitmapDrawable());
         popupWindow.update();
-        ListView itemListView = (ListView) root.findViewById(R.id.itemListView);
+        itemListView = (ListView) root.findViewById(R.id.itemListView);
         TextView tv1 = (TextView) root.findViewById(R.id.tvFillter1);
         TextView tv2 = (TextView) root.findViewById(R.id.tvFillter2);
         TextView tv3 = (TextView) root.findViewById(R.id.tvFillter3);
@@ -321,7 +326,7 @@ public class CinemaFragment extends Fragment implements View.OnClickListener,
             textView.setOnClickListener(new PopupListener(tvList,itemListView));
         }
         //默认出现行政区域的过滤列表
-        areaFillterAdapter = new AreaFillterAdapter(areaList,getActivity(),CinemaFragment.this);
+        areaFillterAdapter = new AreaFillterAdapter(resultJSON,getActivity(),CinemaFragment.this);
         itemListView.setAdapter(areaFillterAdapter);
         //以下拉方式显示
         popupWindow.showAsDropDown(laySearch);
@@ -330,7 +335,7 @@ public class CinemaFragment extends Fragment implements View.OnClickListener,
     }
 
     /**
-     * 行政区域listView点击的回调方法
+     * 地铁listView点击的回调方法
      * @param v
      * @param position
      */
@@ -345,23 +350,51 @@ public class CinemaFragment extends Fragment implements View.OnClickListener,
         adapter.notifyDataSetChanged();
     }
 
+    /**
+     * 行政区域ListView点击的回掉方法
+     */
     @Override
-    public void areaFillterCallback(View v, int position) {
+    public void areaFillterCallback(View v, final String key,int position) {
+        //先将所有字体颜色都设置为灰色
+//        for(int i=0; i<itemListView.getCount(); i++){
+//            View itemView = itemListView.getChildAt(i);
+//            if (itemView != null) {
+//                ((TextView)itemView.findViewById(R.id.tvContent)).setTextColor(Color.GRAY);
+//            }
+//        }
+//        TextView textView = (TextView) v.findViewById(R.id.tvContent);
+//        textView.setTextColor(Color.RED);
+        //如果用户选择的行政区域为空，不再往下执行代码
+        if(key == null || TextUtils.isEmpty(key)) return;
         areaFillterAdapter.notifyDataSetChanged();
-        cinemas.clear();
-        if(position == 0){
-            cinemas.addAll(backupList);
-        } else {
-            //获取用户选择的行政区域id
-            int areaId = areaList.get(position).getId();
-            //对数据源遍历找出该行政区域的影院
-            for(CinemaEntity entity : backupList){
-                if(entity.getAreaId() == areaId){
-                    cinemas.add(entity);
+        myDialog = LoadingDialog.createLoadingDialog(getActivity());
+        myDialog.show();
+        threadHelper.dataHander(new ThreadHandler() {
+            @Override
+            public Object run() {
+                try {
+                    //根据用户选择的行政区域来筛选影院
+                    JSONArray resultArray = resultJSON.optJSONArray(key);
+                    List<CinemaEntity> list = (List<CinemaEntity>) GsonUtils
+                            .jsonToList(resultArray.toString(), new TypeToken<List<CinemaEntity>>() {
+                            }.getType());
+                    cinemas.clear();
+                    cinemas.addAll(list);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return e;
                 }
+                return true;
             }
-        }
-        adapter.notifyDataSetChanged();
+
+            @Override
+            public void result(Object result) {
+                if (result != null && !(result instanceof Exception))
+                    sortData();
+                else
+                    myDialog.dismiss();
+            }
+        });
     }
 
     class PopupListener implements View.OnClickListener {
@@ -384,7 +417,7 @@ public class CinemaFragment extends Fragment implements View.OnClickListener,
                     textView.setBackgroundColor(getResources().getColor(R.color.white));
                     switch (i){
                         case 0://行政区域
-                            areaFillterAdapter = new AreaFillterAdapter(areaList,getActivity(),CinemaFragment.this);
+                            areaFillterAdapter = new AreaFillterAdapter(resultJSON,getActivity(),CinemaFragment.this);
                             listView.setAdapter(areaFillterAdapter);
                             break;
                         case 1://地铁信息
@@ -492,20 +525,28 @@ public class CinemaFragment extends Fragment implements View.OnClickListener,
                 if (result == null || result instanceof Exception) {
                     myDialog.dismiss();
                     Toast.makeText(getActivity(), "请求异常", Toast.LENGTH_SHORT).show();
+                    pullToRefresh.onRefreshComplete();
                 } else {
                     try {
-                        JSONObject jsonResult = new JSONObject(result.toString());
-                        JSONArray jsonData = jsonResult.optJSONArray("data");
-                        List<CinemaEntity> list = (List<CinemaEntity>) GsonUtils.jsonToList(
-                                jsonData.toString(), new TypeToken<List<CinemaEntity>>() {
-                                }.getType());
-                        if (list.size() > 0) {
+                        resultJSON = new JSONObject(result.toString());
+                        resultJSON = resultJSON.optJSONObject("data");
+                        Iterator<String> iterator = resultJSON.keys();
+                        List<CinemaEntity> localList = new ArrayList<CinemaEntity>();
+                        while (iterator.hasNext()){
+                            String key = iterator.next();
+                            JSONArray dataArray = resultJSON.getJSONArray(key);
+                            List<CinemaEntity> list = (List<CinemaEntity>) GsonUtils.jsonToList(dataArray.toString(),
+                                    new TypeToken<List<CinemaEntity>>() {
+                                    }.getType());
+                            localList.addAll(list);
+                        }
+                        if (localList.size() > 0) {
                             cinemas.clear();
                             backupList.clear();
-                            cinemas.addAll(list);
-                            backupList.addAll(list);
+                            cinemas.addAll(localList);
+                            backupList.addAll(localList);
                             sortData();
-                            saveData(list);
+                            saveData(localList);
                         } else {
                             myDialog.dismiss();
                         }
@@ -560,8 +601,8 @@ public class CinemaFragment extends Fragment implements View.OnClickListener,
         @Override
         public void onReceive(Context context, Intent intent) {
             SupportCityEntity cityEntity = (SupportCityEntity) intent.getSerializableExtra("city");
-            tvCity.setText(cityEntity.getNm());
-            getDataFormInternet();
+            tvCity.setText(cityEntity.getName());
+//            getDataFormInternet();
         }
     }
 

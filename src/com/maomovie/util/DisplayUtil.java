@@ -1,6 +1,9 @@
 package com.maomovie.util;
 
 import android.content.Context;
+import android.graphics.Point;
+import android.util.DisplayMetrics;
+import android.view.WindowManager;
 
 /**
  * Created by yanpeng on 2017/1/12.
@@ -54,4 +57,15 @@ public class DisplayUtil {
         final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
         return (int) (spValue * fontScale + 0.5f);
     }
+    
+    
+    public static Point getSizeNew(Context ctx) {  
+        WindowManager wm = (WindowManager) ctx.getSystemService(Context.WINDOW_SERVICE);  
+        DisplayMetrics dm = new DisplayMetrics();  
+        wm.getDefaultDisplay().getMetrics(dm);  
+        Point size = new Point();  
+        size.x = dm.widthPixels;  
+        size.y = dm.heightPixels;  
+        return size;  
+    }  
 }

@@ -12,14 +12,14 @@ import java.util.Comparator;
 public class PinyinComparator implements Comparator<SupportCityEntity> {
 
 	public int compare(SupportCityEntity o1, SupportCityEntity o2) {
-		if (o1.getPy().equals("@")
-				|| o2.getPy().equals("#")) {
+		if (o1.getPinyin().equals("@")
+				|| o2.getPinyin().equals("#")) {
 			return -1;
-		} else if (o1.getPy().equals("#")
-				|| o2.getPy().equals("@")) {
+		} else if (o1.getPinyin().equals("#")
+				|| o2.getPinyin().equals("@")) {
 			return 1;
 		} else {
-			return o1.getPy().compareTo(o2.getPy());
+			return o1.getPinyin().compareTo(o2.getPinyin());
 		}
 	}
 

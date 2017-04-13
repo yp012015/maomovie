@@ -31,3 +31,5 @@
 -dontwarn com.google.**
 -keep class com.google.protobuf.** {*;}
 
+-keepnames class * com.maomovie.util.GlideCache
+

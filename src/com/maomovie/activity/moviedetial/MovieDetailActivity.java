@@ -6,31 +6,28 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.*;
 import android.widget.*;
+import com.bumptech.glide.Glide;
 import com.maomovie.R;
 import com.maomovie.activity.GalleryActivity;
-import com.maomovie.activity.playvideo.MovieVideoActivity;
 import com.maomovie.activity.login.LoginActivity;
+import com.maomovie.activity.playvideo.MovieVideoActivity;
 import com.maomovie.entity.TodayMovieEntity;
 import com.maomovie.service.LoadingDialog;
 import com.maomovie.service.ThreadHandler;
 import com.maomovie.service.ThreadHelper;
 import com.maomovie.sqlite.service.TodayMovieService;
+import com.maomovie.util.DisplayUtil;
 import com.maomovie.util.HttpUtil;
 import com.maomovie.util.ToastUtil;
-import com.maomovie.util.DisplayUtil;
 import com.maomovie.view.ObservableScrollView;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.io.Serializable;
-import java.net.URL;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -289,36 +286,14 @@ public class MovieDetailActivity extends Activity implements View.OnClickListene
      * 设置评论者的头像，由于头像是网络资源，需要在子线程中获取drawable对象
      * @param urlStrs
      */
-    private void setAvatar(String[] urlStrs){
-        threadHelper.dataHander(new ThreadHandler() {
-            @Override
-            public Object run() {
-                try {
-                    Drawable[] drawables = new Drawable[urlStrs.length];
-                    int i = 0;
-                    for(String urlStr : urlStrs){
-                        URL url = new URL(urlStr);
-                        Drawable drawable = Drawable.createFromStream(url.openStream(), "src");
-                        drawables[i++] = drawable;
-                    }
-                    return drawables;
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return null;
-                }
-            }
-
-            @Override
-            public void result(Object result) {
-                if(result != null){
-                    Drawable[] drawables = (Drawable[]) result;
-                    for(int i=0; i<drawables.length; i++){
-                        ivPhotos[i].setImageDrawable(drawables[i]);
-                        ivPhotos[i].setOnClickListener(MovieDetailActivity.this);
-                    }
-                }
-            }
-        });
+    private void setAvatar(final String[] urlStrs){
+        for(int i=0; i<ivPhotos.length; i++){
+            ivPhotos[i].setOnClickListener(this);
+            if(urlStrs[i].contains("avatar") && urlStrs[i].endsWith("__40465654__9539763.png"))
+                continue;
+            Glide.with(context).load(urlStrs[i]).thumbnail(0.1f)
+                    .placeholder(R.drawable.default_avatar).error(R.drawable.default_avatar).into(ivPhotos[i]);
+        }
     }
 
     @Override

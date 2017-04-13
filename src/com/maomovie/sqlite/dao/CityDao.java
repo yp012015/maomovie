@@ -21,9 +21,9 @@ public class CityDao extends BaseDao {
         StringBuilder sql = new StringBuilder();
         sql.append("INSERT INTO City (id,nm,py,areas) VALUES (");
         sql.append(cityEntity.getId() + ",");
-        sql.append("'" + cityEntity.getNm() + "',");
-        sql.append("'" + cityEntity.getPy() + "',");
-        sql.append("'" + GsonUtils.toJsonString(cityEntity.getAreas()) + "'");
+        sql.append("'" + cityEntity.getName() + "',");
+        sql.append("'" + cityEntity.getPinyin() + "',");
+        sql.append("'" + cityEntity.getRank() + "'");
         sql.append(")");
         db.execSQL(sql.toString());
     }

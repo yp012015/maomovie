@@ -30,6 +30,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -55,7 +56,7 @@ public class ChoiceCityAcvitity extends BaseActivity implements OnClickListener 
     private ThreadHelper threadHelper = new ThreadHelper(new Handler());
     //声明拼音排序的比较器
     PinyinComparator pinyinComparator = new PinyinComparator();
-    private List<SupportCityEntity> dataList;//数据源
+    private List<SupportCityEntity> dataList = new ArrayList<SupportCityEntity>();//数据源
     //声明数据库操作需要的服务
     private CityService cityService;
 
@@ -219,10 +220,18 @@ public class ChoiceCityAcvitity extends BaseActivity implements OnClickListener 
                 } else {
                     try {
                         JSONObject resultObj = new JSONObject(result.toString());
-                        JSONArray dataArray = resultObj.optJSONArray("data");
-                        dataList = (List<SupportCityEntity>) GsonUtils.jsonToList(dataArray.toString(),
-                                new TypeToken<List<SupportCityEntity>>() {
-                                }.getType());
+                        resultObj = resultObj.optJSONObject("data");
+                        resultObj = resultObj.optJSONObject("CityMap");
+                        Iterator<String> iterator = resultObj.keys();
+                        JSONArray dataArray;
+                        while (iterator.hasNext()){
+                            String key = iterator.next();
+                            dataArray = resultObj.getJSONArray(key);
+                            List<SupportCityEntity> list = (List<SupportCityEntity>) GsonUtils.jsonToList(dataArray.toString(),
+                                    new TypeToken<List<SupportCityEntity>>() {
+                                    }.getType());
+                            dataList.addAll(list);
+                        }
                         return dataList;
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -263,8 +272,8 @@ public class ChoiceCityAcvitity extends BaseActivity implements OnClickListener 
         } else {
             filterDateList.clear();
             for (SupportCityEntity sortModel : dataList) {
-                String name = sortModel.getNm();
-                String pinying = sortModel.getPy();
+                String name = sortModel.getName();
+                String pinying = sortModel.getPinyin();
                 if (name.indexOf(filterStr) != -1 || pinying.toLowerCase().startsWith(filterStr.toLowerCase())) {
                     filterDateList.add(sortModel);
                 }
@@ -328,13 +337,13 @@ public class ChoiceCityAcvitity extends BaseActivity implements OnClickListener 
             String currentCity = tvCurrentCity.getText().toString();
             currentCity = currentCity.replace("市", "");
             SupportCityEntity entity = new SupportCityEntity();
-            entity.setNm(currentCity);
+            entity.setName(currentCity);
             finishActivity(entity);
         } else {
             for (int i = 0; i < hotCitys.length; i++) {
                 if (v == hotCitys[i]) {
                     SupportCityEntity entity = new SupportCityEntity();
-                    entity.setNm(hotCitys[i].getText().toString());
+                    entity.setName(hotCitys[i].getText().toString());
                     finishActivity(entity);
                     break;
                 }

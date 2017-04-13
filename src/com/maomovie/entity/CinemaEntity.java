@@ -29,7 +29,7 @@ public class CinemaEntity implements Serializable,Comparable<CinemaEntity> {
      * area : 龙泉驿区
      * dealPrice : 30
      * deal : 1
-     * sell : 1
+     * sell : true
      * suw :
      * dis :
      * feature :
@@ -62,7 +62,7 @@ public class CinemaEntity implements Serializable,Comparable<CinemaEntity> {
     private String note;            // 特殊说明
     private String park;            // 停车位信息
     private int referencePrice;     // 参考价
-    private int sell;               // 是否选座 0否 1是
+    private boolean sell;           // 是否选座
     private int sellPrice;          // 选座起始价
     private String suw;             // 地铁信息
     private String tel;             // 电话
@@ -237,11 +237,11 @@ public class CinemaEntity implements Serializable,Comparable<CinemaEntity> {
         this.deal = deal;
     }
 
-    public int getSell() {
+    public boolean getSell() {
         return sell;
     }
 
-    public void setSell(int sell) {
+    public void setSell(boolean sell) {
         this.sell = sell;
     }
 

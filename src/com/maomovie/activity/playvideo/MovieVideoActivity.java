@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.*;
 import android.widget.*;
+import com.bumptech.glide.Glide;
 import com.handmark.pulltorefresh.library.ILoadingLayout;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
@@ -41,8 +42,6 @@ public class MovieVideoActivity extends Activity implements View.OnClickListener
     private TextView tvCmsTotal1,tvCmsTotal2;//显示评论总数量(分别对应layCommentTotal，headerView2)
     private LinearLayout  layCommentTotal;  //评论总条数父控件
     private RelativeLayout layProgress;//等待框父控件
-    private ImageDownloader mDownloader;
-
     private SuperVideoPlayer mSuperVideoPlayer;
     private View mPlayBtnView;
 
@@ -50,8 +49,8 @@ public class MovieVideoActivity extends Activity implements View.OnClickListener
     private CommentAdapter listAdaper;
     private JSONArray commentJsonArray;//观众评论数据；
     private String movieName;   //电影名称
-    private int scrollState;
     private int offset = 1,limit=50,totalPage=1;//查询评论的下标,单页条数,总页数
+    private int savePlayTime = 0;//用于保存页面跳转时的播放进度
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -335,7 +334,21 @@ public class MovieVideoActivity extends Activity implements View.OnClickListener
 
     @Override
     public void onScrollStateChanged(AbsListView view, int scrollState) {
-        this.scrollState = scrollState;
+        switch (scrollState){
+            case SCROLL_STATE_FLING:
+                //Log.i("Main","用户在手指离开屏幕之前，由于滑了一下，视图仍然依靠惯性继续滑动");
+                Glide.with(getApplicationContext()).pauseRequests();
+                //刷新
+                break;
+            case SCROLL_STATE_IDLE:
+               // Log.i("Main", "视图已经停止滑动");
+                Glide.with(getApplicationContext()).resumeRequests();
+                break;
+            case SCROLL_STATE_TOUCH_SCROLL:
+               // Log.i("Main","手指没有离开屏幕，视图正在滑动");
+                Glide.with(getApplicationContext()).resumeRequests();
+                break;
+        }
     }
 
     @Override
@@ -344,37 +357,6 @@ public class MovieVideoActivity extends Activity implements View.OnClickListener
             layCommentTotal.setVisibility(View.VISIBLE);
         } else {
             layCommentTotal.setVisibility(View.GONE);
-        }
-        switch (scrollState){
-            case SCROLL_STATE_FLING://手指不动了，但是屏幕还在滚动状态
-                return;
-        }
-        int end = firstVisibleItem==0 ? visibleItemCount-1 : visibleItemCount;
-        for(int i=1; i<=end; i++){
-            // 获取到评论用户的头像
-            int position = firstVisibleItem==0 ? i : i-1;
-            ImageView iv_show = (ImageView) view.getChildAt(position).findViewById(R.id.ivPhoto1);
-            TextView tvNick = (TextView) view.getChildAt(position).findViewById(R.id.tvCommentator1);
-            if (mDownloader == null) {
-                mDownloader = new ImageDownloader();
-            }
-            String ivTag = null;
-            if (iv_show != null) {
-                ivTag = (String) iv_show.getTag();
-            }
-            if (ivTag == null || ivTag.endsWith("__40465654__9539763.png")) {
-                continue;
-            }
-            if (mDownloader != null) {
-                // 异步下载图片
-                mDownloader.imageDownload(ivTag, iv_show, "/maomovie/cache/avatarImg/", MovieVideoActivity.this,
-                        new OnImageDownload() {
-                            @Override
-                            public void onDownloadSucc(Bitmap bitmap, String c_url, ImageView mimageView) {
-                                LoadImageUtil.setImageByImageView(mimageView, bitmap);
-                            }
-                        });
-            }
         }
     }
 
@@ -397,7 +379,22 @@ public class MovieVideoActivity extends Activity implements View.OnClickListener
     public void clickImage(String avatarUrl) {
         Intent intent = new Intent(context, GalleryActivity.class);
         intent.putExtra("imgUrls", new String[]{avatarUrl});
-        intent.putExtra("currentIndex",0);
+        intent.putExtra("currentIndex", 0);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onPause() {
+        savePlayTime = mSuperVideoPlayer.getCurrentPosition();
+        mSuperVideoPlayer.pausePlay(false);
+        super.onPause();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        if(savePlayTime != 0){
+            mSuperVideoPlayer.startPlayVideo(savePlayTime);
+        }
     }
 }

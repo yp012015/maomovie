@@ -44,7 +44,7 @@ public class CinemaDao extends BaseDao{
         sql.append("'" + cinemaEntity.getNote() + "',");
         sql.append("'" + cinemaEntity.getPark() + "',");
         sql.append(cinemaEntity.getReferencePrice() + ",");
-        sql.append(cinemaEntity.getSell() + ",");
+        sql.append("'" + cinemaEntity.getSell() + "',");
         sql.append(cinemaEntity.getSellPrice() + ",");
         sql.append("'" + cinemaEntity.getSuw() + "',");
         sql.append("'" + cinemaEntity.getTel() + "',");

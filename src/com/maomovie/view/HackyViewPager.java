@@ -2,6 +2,7 @@ package com.maomovie.view;
 
 import android.content.Context;
 import android.support.v4.view.ViewPager;
+import android.util.AttributeSet;
 import android.view.MotionEvent;
 
 /**
@@ -18,15 +19,23 @@ import android.view.MotionEvent;
  * @author Chris Banes
  */
 public class HackyViewPager extends ViewPager {
-
-    public HackyViewPager(Context context) {
+    private boolean isCanScroll = true;
+    public HackyViewPager(Context context,String[] srcArray) {
         super(context);
+        if(srcArray.length <=1)
+            isCanScroll = false;
     }
+
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         try {
-            return super.onInterceptTouchEvent(ev);
+            if(isCanScroll){
+                return super.onInterceptTouchEvent(ev);
+            }else{
+                //false  不能左右滑动
+                return false;
+            }
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
             return false;

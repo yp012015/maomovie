@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 import android.widget.AbsListView.OnScrollListener;
+import com.bumptech.glide.Glide;
 import com.google.gson.reflect.TypeToken;
 import com.handmark.pulltorefresh.library.ILoadingLayout;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -37,10 +38,13 @@ import com.maomovie.util.OnImageDownload;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MovieFragment extends Fragment implements View.OnClickListener ,FragmentMovieAdapter.Callback,MovieFragView{
+public class MovieFragment extends Fragment implements View.OnClickListener , OnScrollListener,FragmentMovieAdapter.Callback,MovieFragView{
 
     private View view;
     private PullToRefreshListView pullToRefresh;
@@ -48,7 +52,7 @@ public class MovieFragment extends Fragment implements View.OnClickListener ,Fra
     private LinearLayout selectCity;//选择城市的父控件
     private FragmentMovieAdapter adapter;
     private List<TodayMovieEntity> todayMovies = new ArrayList<TodayMovieEntity>();
-    private ImageDownloader mDownloader;
+//    private ImageDownloader mDownloader;
     private RefreshCityRecevier refreshCityRecevier = new RefreshCityRecevier();
     private Dialog myDialog;
     private int pageIndex = 1;//查询页下标
@@ -161,8 +165,10 @@ public class MovieFragment extends Fragment implements View.OnClickListener ,Fra
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                //这里在Adapter里面使用Glide框架加载图片更加优雅流畅，不再使用以下代码
+
                 //因为pullToRefresh有上拉刷新和下拉刷新，所有可见的item会在头部和尾部各多出一个
-                for (int i = 1; i <= visibleItemCount && todayMovies.size() > 0; i++) {
+                /*for (int i = 1; i <= visibleItemCount && todayMovies.size() > 0; i++) {
                     // 获取到item的电影剧照
                     int position = firstVisibleItem == 0 ? (firstVisibleItem+i-1):(firstVisibleItem+i-2);
                     if (position == totalItemCount - 2)
@@ -190,7 +196,7 @@ public class MovieFragment extends Fragment implements View.OnClickListener ,Fra
                                     }
                                 });
                     }
-                }
+                }*/
             }
         });
     }
@@ -352,6 +358,7 @@ public class MovieFragment extends Fragment implements View.OnClickListener ,Fra
                 pullToRefresh.onRefreshComplete();
             }
             try {
+//				saveMovieInfoToFile(result.toString(),getActivity().getFilesDir() + "/data","movie-info.txt");
                 JSONObject jsonResult = new JSONObject(result.toString());
                 int status = jsonResult.optInt("status");
                 if (status == 0) {//表示请求成功
@@ -395,6 +402,52 @@ public class MovieFragment extends Fragment implements View.OnClickListener ,Fra
             movieFragBiz.getDataFromInternet(pageIndex);
         }
     }
+    
+    /**
+     * 将电影信息保存到文件中
+     * @param movieInfo	电影信息
+     * @param filePath	文件目录
+     * @param fileName	文件名称
+     * @throws IOException
+     */
+    private void saveMovieInfoToFile(String movieInfo,String filePath,String fileName) throws IOException{
+    	if(movieInfo == null || filePath == null || fileName == null) return;
+    	File path = new File(filePath);
+    	if(!path.exists()){//如果目录不存在，创建目录
+    		boolean flag = path.mkdirs();
+    		Log.i("TAG", "mkdirs " + filePath + flag);
+    	}
+    	//根据目录和文件名称创建File对象
+    	File file = new File(path, fileName);
+		PrintWriter writer = new PrintWriter(file,"utf-8");
+		char[] buf = movieInfo.toCharArray();
+		writer.write(buf );
+		writer.close();
+    }
+
+    @Override
+    public void onScrollStateChanged(AbsListView view, int scrollState) {
+        switch (scrollState){
+            case SCROLL_STATE_FLING:
+                //Log.i("Main","用户在手指离开屏幕之前，由于滑了一下，视图仍然依靠惯性继续滑动");
+                Glide.with(this).pauseRequests();
+                //刷新
+                break;
+            case SCROLL_STATE_IDLE:
+                // Log.i("Main", "视图已经停止滑动");
+                Glide.with(this).resumeRequests();
+                break;
+            case SCROLL_STATE_TOUCH_SCROLL:
+                // Log.i("Main","手指没有离开屏幕，视图正在滑动");
+                Glide.with(this).resumeRequests();
+                break;
+        }
+    }
+
+    @Override
+    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+
+    }
 
     /**
      * 广播接收器：接收选择城市之后发送的广播
@@ -403,7 +456,7 @@ public class MovieFragment extends Fragment implements View.OnClickListener ,Fra
         @Override
         public void onReceive(Context context, Intent intent) {
             SupportCityEntity cityEntity = (SupportCityEntity) intent.getSerializableExtra("city");
-            tvCity.setText(cityEntity.getNm());
+            tvCity.setText(cityEntity.getName());
         }
     }
 

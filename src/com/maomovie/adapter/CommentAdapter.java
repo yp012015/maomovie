@@ -1,5 +1,12 @@
 package com.maomovie.adapter;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import com.bumptech.glide.Glide;
+import com.maomovie.R;
+import com.maomovie.components.listsort.ViewHolder;
+
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,11 +14,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import com.maomovie.R;
-import com.maomovie.components.listsort.ViewHolder;
-import com.maomovie.util.ToastUtil;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 /**
  * Created by yanpeng on 2017/1/16.
@@ -60,9 +62,12 @@ public class CommentAdapter extends BaseAdapter {
         RatingBar ratingBar = ViewHolder.get(convertView,R.id.ratingBar1);
         ImageView imageView = ViewHolder.get(convertView,R.id.ivPhoto1);
         final String avatarUrl = commentJsonObj.optString("avatarurl");
-        imageView.setTag(avatarUrl);
-        //这句代码的作用是为了解决convertView被重用的时候，图片预设的问题
-        imageView.setImageResource(R.drawable.default_avatar);
+        if(avatarUrl.endsWith("__40465654__9539763.png")){
+            imageView.setImageResource(R.drawable.default_avatar);
+        } else {
+            Glide.with(context).load(avatarUrl).thumbnail(0.1f)
+                    .placeholder(R.drawable.default_avatar).error(R.drawable.default_avatar).into(imageView);
+        }
         //点击图片监听器
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override

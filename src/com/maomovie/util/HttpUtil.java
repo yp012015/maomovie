@@ -39,7 +39,7 @@ public class HttpUtil {
     private static final int DEF_CONN_TIMEOUT = 30000;
     private static final int DEF_READ_TIMEOUT = 30000;
     private static String userAgent = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.66 Safari/537.36";
-    private static String apiUrl = "http://platform.mobile.meituan.com/open/maoyan";
+    private static String apiUrl = "http://m.maoyan.com/";
     private String eamUrl = "http://Mobileapproval.scmcc.com.cn:8999/EAMManagement/{actionPath}";
 
     /**
@@ -47,7 +47,7 @@ public class HttpUtil {
      * @return
      */
     public static Object getCitys(){
-        String url = apiUrl + "/v1/cities.json";
+        String url = apiUrl + "changecity.json";
         try {
             return net(url,null,"GET");
         } catch (Exception e) {
@@ -104,7 +104,7 @@ public class HttpUtil {
      * @return
      */
     public static Object getCinemasOfCity(String cityName){
-        String url = apiUrl + "/v1/cinemas.json";
+        String url = apiUrl + "cinemas.json";
         Map<String, Object> params = new HashMap<String, Object>();// 请求参数
         params.put("ct",cityName);
         try {
@@ -122,7 +122,7 @@ public class HttpUtil {
      * @return
      */
     public static Object getPlayingMovies(String cityName){
-        String url = apiUrl + "/v1/movies.json";
+        String url = apiUrl + "movies.json";
         Map<String, Object> params = new HashMap<String, Object>();// 请求参数
         params.put("ct",cityName);
         try {
@@ -161,7 +161,7 @@ public class HttpUtil {
      * @return
      */
     public static Object getSessionOfCinemaByMovieid(String date,String cityName,int movieId){
-        String url = apiUrl + "/v1/movie/{movieId}/shows.json";
+        String url = apiUrl + "movie/{movieId}/shows.json";
         url = url.replace("{movieId}", String.valueOf(movieId));
         Map<String, Object> params = new HashMap<String, Object>();// 请求参数
         params.put("dt",date);

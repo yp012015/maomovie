@@ -48,25 +48,14 @@
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Light.NoTitleBar">
 
-        <!-- 百度定位相关的开始 -->
-        <service
-                android:name="com.baidu.location.f"
-                android:enabled="true"
-                android:process=":remote">
-            <intent-filter>
-                <action android:name="com.baidu.location.service_v2.2"></action>
-            </intent-filter>
-        </service>
-        <meta-data
-                android:name="com.baidu.lbsapi.API_KEY"
-                android:value="SBrvRIPrgzr56uC6ZAQOI5VQVxzmn10Z" />
-        <!--百度定位相关的结束-->
 
         <!--高德地图相关的-->
         <meta-data
                 android:name="com.amap.api.v2.apikey"
                 android:value="db733169460173046abe1730ef5e3958">
         </meta-data>
+        <service android:name="com.amap.api.location.APSService"/>
+        <!--高德地图相关的结束-->
         <activity
                 android:name=".activity.MainActivity"
                 android:label="@string/app_name">
@@ -83,6 +72,7 @@
         </activity>
         <activity android:name=".activity.ChoiceCityAcvitity"
                   android:windowSoftInputMode="adjustPan"
+                  android:screenOrientation="portrait"
                   android:label="@string/app_name">
         </activity>
 
@@ -136,6 +126,7 @@
         <activity
                 android:name="cn.jpush.android.ui.PushActivity"
                 android:configChanges="orientation|keyboardHidden"
+                android:screenOrientation="portrait"
                 android:exported="false">
             <intent-filter>
                 <action android:name="cn.jpush.android.ui.PushActivity"/>
@@ -143,12 +134,21 @@
                 <category android:name="com.maomovie"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activity.MsgActivity"/>
-        <activity android:name=".activity.MoviesOfCinemaActivity"/>
-        <activity android:name=".activity.MapShowActivity"/>
-        <activity android:name=".activity.MovieTheaterActivity"/>
-        <activity android:name=".activity.BaseActivity"/>
-        <activity android:name=".activity.route.ShowMapActivity"/>
+        <activity android:name=".activity.MsgActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.MoviesOfCinemaActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.MovieTheaterActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.route.ShowMapActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.route.TrafficRouteActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.route.BusRouteDetailActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.login.LoginActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.UserInfoActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.playvideo.MovieVideoActivity"
+                  android:configChanges="orientation|keyboardHidden|screenSize"
+                  android:label="@string/app_name"
+                  />
+        <activity android:name=".activity.GalleryActivity"
+                android:screenOrientation="portrait"/>
+        <activity android:name=".activity.moviedetial.MovieDetailActivity" android:screenOrientation="portrait"/>
         <!-- Required SDK核心功能-->
         <service
                 android:name="cn.jpush.android.service.DownloadService"
@@ -189,6 +189,9 @@
         <!-- Required. AppKey copied from Portal -->
         <meta-data android:name="JPUSH_APPKEY" android:value="12ead786c28c8ff5d17c787f"/>
 
+
+        <!--配置Glide的缓存路径-->
+        <meta-data android:name="com.maomovie.util.GlideCache" android:value="GlideModule"/>
     </application>
 
 </manifest>

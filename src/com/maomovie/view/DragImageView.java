@@ -54,7 +54,7 @@ public class DragImageView extends ImageView {
 	private enum MODE {
 		NONE, DRAG, ZOOM
 
-	};
+	}
 
 	private MODE mode = MODE.NONE;// 默认模式
 
@@ -180,7 +180,6 @@ public class DragImageView extends ImageView {
 		int left = 0, top = 0, right = 0, bottom = 0;
 		/** 处理拖动 **/
 		if (mode == MODE.DRAG) {
-
 			/** 在这里要进行判断处理，防止在drag时候越界 **/
 
 			/** 获取相应的l，t,r ,b **/
@@ -268,8 +267,7 @@ public class DragImageView extends ImageView {
 			current_Right = this.getRight() + disX;
 			current_Bottom = this.getBottom() + disY;
 
-			this.setFrame(current_Left, current_Top, current_Right,
-					current_Bottom);
+			this.setFrame(current_Left, current_Top, current_Right,	current_Bottom);
 			/***
 			 * 此时因为考虑到对称，所以只做一遍判断就可以了。
 			 */
@@ -334,16 +332,11 @@ public class DragImageView extends ImageView {
 			}
 
 			if (isControl_H || isControl_V) {
-				this.setFrame(current_Left, current_Top, current_Right,
-						current_Bottom);
+				this.setFrame(current_Left, current_Top, current_Right,current_Bottom);
 			} else {
-				this.setFrame(current_Left, current_Top, current_Right,
-						current_Bottom);
+				this.setFrame(current_Left, current_Top, current_Right,current_Bottom);
 				isScaleAnim = true;// 开启缩放动画
 			}
-
-		} else if(scale > 1 && this.getWidth() > MAX_W){
-			ToastUtil.show(getContext(),"已超出最大缩放比例");
 		}
 
 	}
@@ -410,11 +403,6 @@ public class DragImageView extends ImageView {
 				bottom = Math.min(bottom, start_Bottom);
 				Log.e("jj", "top="+top+",bottom="+bottom+",left="+left+",right="+right);
 				onProgressUpdate(new Integer[] { left, top, right, bottom });
-				try {
-					Thread.sleep(10);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
 			}
 
 			return null;

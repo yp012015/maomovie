@@ -207,6 +207,13 @@ public class SuperVideoPlayer extends RelativeLayout {
     }
 
     /**
+     * 获取当前的播放时间
+     */
+    public int getCurrentPosition(){
+        return mVideoView.getCurrentPosition();
+    }
+
+    /**
      * 判断是否自动隐藏控制器
      */
     public boolean isAutoHideController() {
@@ -288,7 +295,7 @@ public class SuperVideoPlayer extends RelativeLayout {
      * 播放视频
      * should called after setVideoPath()
      */
-    private void startPlayVideo(int seekTime) {
+    public void startPlayVideo(int seekTime) {
         if (null == mUpdateTimer) resetUpdateTimer();
         resetHideTimer();
         mVideoView.setOnCompletionListener(mOnCompletionListener);

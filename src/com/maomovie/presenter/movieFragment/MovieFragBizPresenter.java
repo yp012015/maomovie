@@ -1,8 +1,16 @@
 package com.maomovie.presenter.movieFragment;
 
-import android.content.Context;
-import android.os.Handler;
-import android.view.View;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.util.List;
+
 import com.maomovie.activity.mainfragment.MovieFragView;
 import com.maomovie.entity.TodayMovieEntity;
 import com.maomovie.service.ThreadHandler;
@@ -10,7 +18,10 @@ import com.maomovie.service.ThreadHelper;
 import com.maomovie.sqlite.service.TodayMovieService;
 import com.maomovie.util.HttpUtil;
 
-import java.util.List;
+import android.content.Context;
+import android.os.Handler;
+import android.util.Log;
+import android.view.View;
 
 /**
  * Created by yanpeng on 2016/12/16.
@@ -37,6 +48,11 @@ public class MovieFragBizPresenter implements MovieFragBizInterface{
         threadHelper.dataHander(new ThreadHandler() {
             @Override
             public Object run() {
+            	/*try {
+					readMovieInfoFromFile("/data/data/com.maomovie/files/data/movie-info.txt");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}*/
                 return movieService.queryCount(context);
             }
 
@@ -50,6 +66,22 @@ public class MovieFragBizPresenter implements MovieFragBizInterface{
                 }
             }
         });
+    }
+    /**
+     * 从文件中读取电影的文本信息/data/data/com.maomovie/files/data
+     * @param fileName
+     * @throws IOException 
+     * @throws UnsupportedEncodingException 
+     */
+    private void readMovieInfoFromFile(String fileName) throws UnsupportedEncodingException, IOException{
+    	File file = new File(fileName);
+    	if(!file.exists() || !file.isFile()) return;
+    	BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), "utf-8"));
+    	String info;
+    	while((info=reader.readLine()) != null){
+    		Log.i("TAG", info);
+    	}
+    	reader.close();
     }
 
     /**

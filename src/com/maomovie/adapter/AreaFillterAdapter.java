@@ -7,9 +7,11 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 import com.maomovie.R;
-import com.maomovie.entity.CityEntity;
+import com.maomovie.components.listsort.ViewHolder;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
-import java.util.List;
+import java.util.Iterator;
 
 /**
  * Created by YanP on 2016/8/29.
@@ -17,12 +19,18 @@ import java.util.List;
  */
 public class AreaFillterAdapter extends BaseAdapter{
 
-    private List<CityEntity.AreasBean> dataList;
+    private JSONObject dataJSON;
+    private Iterator<String> iterator;
     private Context context;
     private AreaFillterCallback mCallback;
+    private boolean isClidked = false;
+    private int clickedPosition = 0;
 
-    public AreaFillterAdapter(List<CityEntity.AreasBean> dataList, Context context, AreaFillterCallback callback) {
-        this.dataList = dataList;
+    public AreaFillterAdapter(JSONObject dataJSON, Context context, AreaFillterCallback callback) {
+        if (dataJSON != null) {
+            iterator = dataJSON.keys();
+        }
+        this.dataJSON = dataJSON;
         this.context = context;
         mCallback = callback;
     }
@@ -31,17 +39,28 @@ public class AreaFillterAdapter extends BaseAdapter{
      * 自定义接口，用于回调按钮点击事件到Activity
      */
     public interface AreaFillterCallback {
-        public void areaFillterCallback(View v, int position);
+        public void areaFillterCallback(View v, String key,int position);
     }
 
     @Override
     public int getCount() {
-        return dataList.size();
+        if(dataJSON == null) return 0;
+        return dataJSON.length();
     }
 
     @Override
     public Object getItem(int position) {
-        return dataList.get(position);
+        if(dataJSON == null ) return null;
+        int amcount = 0;
+        JSONArray jsonArray = null;
+        while (iterator.hasNext()){
+            if(amcount++ == position){
+                String key = iterator.next();
+                jsonArray = dataJSON.optJSONArray(key);
+                break;
+            }
+        }
+        return jsonArray;
     }
 
     @Override
@@ -51,37 +70,37 @@ public class AreaFillterAdapter extends BaseAdapter{
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        ViewHolder viewHolder = null;
-        final CityEntity.AreasBean areasBean = dataList.get(position);
         if(convertView == null){
             convertView = View.inflate(context, R.layout.item_cinemafillter,null);
-            viewHolder = new ViewHolder();
-            viewHolder.tvArea = (TextView) convertView.findViewById(R.id.tvContent);
-            convertView.setTag(viewHolder);
-        } else {
-            viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.tvArea.setText(areasBean.getNm() + "(" + areasBean.getCount() + ")");
+        int index = 0;
+        JSONArray jsonArray = null;
+        String key = "";
+        iterator = this.dataJSON.keys();
+        while (iterator.hasNext()){
+            key = iterator.next();
+            if(index++ == position){
+                jsonArray = dataJSON.optJSONArray(key);
+                break;
+            }
+        }
+        TextView tvContent = ViewHolder.get(convertView, R.id.tvContent);
+        if(jsonArray != null){
+            tvContent.setText(key + "(" + jsonArray.length() + ")");
+        }
+        final String areaName = key;
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //先将所有的数据选中状态都设置为false
-                for(CityEntity.AreasBean bean : dataList){
-                    bean.setSelected(false);
-                }
-                areasBean.setSelected(true);
-                mCallback.areaFillterCallback(v, position);
+                mCallback.areaFillterCallback(v, areaName, position);
+                isClidked = true;
+                clickedPosition = position;
             }
         });
-        if(areasBean.isSelected()){//将当前选中的字体变为红色
-            viewHolder.tvArea.setTextColor(Color.RED);
-        } else{//其他未选中的字体变为灰色
-            viewHolder.tvArea.setTextColor(context.getResources().getColor(R.color.black_gray));
+        tvContent.setTextColor(Color.GRAY);
+        if(isClidked && position == clickedPosition){
+            tvContent.setTextColor(Color.RED);
         }
         return convertView;
-    }
-
-    class ViewHolder {
-        TextView tvArea;
     }
 }

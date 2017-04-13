@@ -26,7 +26,7 @@ public class ImageDownloader {
 	private Map<String, SoftReference<Bitmap>> imageCaches = new HashMap<String, SoftReference<Bitmap>>();
 
 	/**
-	 * @param url  该没ImageView对应的url
+	 * @param url ImageView对应的url
 	 * @param mImageView
 	 * @param path  文件的存储路径
 	 * @param mActivity

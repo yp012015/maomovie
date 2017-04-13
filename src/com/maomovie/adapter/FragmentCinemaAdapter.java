@@ -88,7 +88,7 @@ public class FragmentCinemaAdapter extends BaseAdapter {
         }
         viewHolder.distance.setText(String.valueOf(str));
         viewHolder.price.setText(String.valueOf(entity.getSellPrice()));
-        if (entity.getSell() == 1) {
+        if (entity.getSell()) {
             viewHolder.sell.setVisibility(View.VISIBLE);
         } else{
             viewHolder.sell.setVisibility(View.GONE);

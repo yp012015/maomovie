@@ -24,9 +24,11 @@ public class ThreadHelper {
 	public int dataHander(final Runnable runnable) {
 		final HandlerThread thread = new HandlerThread(UUID.randomUUID().toString());
 		thread.start();
+		//子线程中的Handler
 		Handler handler = new Handler(thread.getLooper()) {
 			@Override
 			public void handleMessage(Message msg) {
+				//子线程收到消息后，执行方法
 				runnable.run();
 			}
 		};
@@ -39,9 +41,11 @@ public class ThreadHelper {
 	public int dataHander(final ThreadHandler threadHandler) {
 		final HandlerThread thread = new HandlerThread(UUID.randomUUID().toString());
 		thread.start();
+		//子线程中的Handler
 		Handler handler = new Handler(thread.getLooper()) {
 			@Override
 			public void handleMessage(Message msg) {
+				//子线程收到消息后，执行方法
 				final Object result = threadHandler.run();
 				ThreadHelper.this.handler.post(new Runnable() {
 					public void run() {

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
+import com.bumptech.glide.Glide;
 import com.maomovie.R;
 import com.maomovie.activity.MovieTheaterActivity;
 import com.maomovie.components.listsort.ViewHolder;
@@ -19,7 +20,6 @@ import java.util.List;
  */
 public class FragmentMovieAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
-    private boolean scrollState = false;
     private List<TodayMovieEntity> todayMovies;
     private Context context;
     private Callback mCallback;
@@ -37,10 +37,6 @@ public class FragmentMovieAdapter extends BaseAdapter {
         this.todayMovies = todayMovies;
         this.context = context;
         mCallback = callback;
-    }
-
-    public void setScrollState(boolean scrollState) {
-        this.scrollState = scrollState;
     }
 
     public void addFirst(TodayMovieEntity entity) {
@@ -82,16 +78,19 @@ public class FragmentMovieAdapter extends BaseAdapter {
         TextView mark = ViewHolder.get(convertView,R.id.tvMark);
         TextView icMark = ViewHolder.get(convertView,R.id.icMark);
         ImageView ivPhoto = ViewHolder.get(convertView,R.id.moviePhoto);
-        Button btnBuy = ViewHolder.get(convertView,R.id.btn_BuyTicket);
+        Button btnBuy = ViewHolder.get(convertView, R.id.btn_BuyTicket);
         title.setText(movieEntity.getNm());
         String url = movieEntity.getImg();
 
         content.setText(movieEntity.getScm());
         status.setText(movieEntity.getShowInfo());
         mark.setText(String.valueOf(movieEntity.getSc()));
-        ivPhoto.setTag(url);
+//        ivPhoto.setTag(url);
         //这句代码的作用是为了解决convertView被重用的时候，图片预设的问题
         ivPhoto.setImageResource(R.drawable.cartoon_list_item_default);
+
+        Glide.with(context).load(url).thumbnail(0.4f)
+            .placeholder(R.drawable.cartoon_list_item_default).error(R.drawable.cartoon_list_item_default).into(ivPhoto);
 
         if(movieEntity.getPreSale() == 1){//预售标识 1-预售 0-正常
             icMark.setVisibility(View.INVISIBLE);

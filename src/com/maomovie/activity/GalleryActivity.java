@@ -3,6 +3,7 @@ package com.maomovie.activity;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v4.view.PagerAdapter;
@@ -10,6 +11,9 @@ import android.support.v4.view.ViewPager;
 import android.view.*;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.maomovie.R;
 import com.maomovie.util.ImageDownloader;
 import com.maomovie.util.LoadImageUtil;
@@ -17,6 +21,8 @@ import com.maomovie.util.OnImageDownload;
 import com.maomovie.view.DragImageView;
 import com.maomovie.view.HackyViewPager;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
+
+import java.security.KeyStore;
 
 /**
  * 功能：浏览图片的Activity
@@ -53,15 +59,13 @@ public class GalleryActivity extends Activity {
     }
 
     private void initViewPager(String[] srcArray) {
-        photoViewPager = new HackyViewPager(this);
+        photoViewPager = new HackyViewPager(this,urlArray);
         setContentView(photoViewPager);
         photoViewPager.setAdapter(new SamplePagerAdapter(srcArray));
         photoViewPager.setCurrentItem(currentIndex);
     }
 
     class SamplePagerAdapter extends PagerAdapter {
-        private ImageDownloader imageDownloader;
-
         DisplayImageOptions options;
 
         private String[] data;
@@ -74,7 +78,6 @@ public class GalleryActivity extends Activity {
                     .showImageOnFail(R.color.gray).cacheInMemory(true)
                     .cacheOnDisc(false).considerExifParams(true)
                     .bitmapConfig(Bitmap.Config.RGB_565).build();
-            imageDownloader = new ImageDownloader();
         }
 
         @Override
@@ -112,17 +115,37 @@ public class GalleryActivity extends Activity {
                 txtIndex.setText("" + (position + 1));
             }
             final DragImageView photoView = (DragImageView) view.findViewById(R.id.imgView);
+            container.addView(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
             // 设置默认图片
             photoView.setImageResource(R.color.gray);
-            container.addView(view, ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
-
-            if(imageDownloader != null){
-                DownloadImageTask task = new DownloadImageTask();
-                imageDownloader.imageDownload(data[position], photoView, "/maomovie/cache/avatarImg/",
-                        GalleryActivity.this,task);
+            if(data[position].endsWith("__40465654__9539763.png")){
+                photoView.setImageResource(R.drawable.default_avatar);
+            } else {
+                SimpleTarget<Bitmap> target = new SimpleTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(Bitmap bitmap, GlideAnimation<? super Bitmap> glideAnimation) {
+                        photoView.setImageBitmap(bitmap);
+                    }
+                };
+                Glide.with(GalleryActivity.this).load(data[position]).asBitmap()
+                        .placeholder(R.drawable.bg_default_cat_gray).thumbnail(0.2f).into(target);
             }
-            photoView.setTag(data[position]);
-            photoView.setTag(data[position]);
+            photoView.setmActivity(GalleryActivity.this);//注入Activity.
+            /** 测量状态栏高度 **/
+            ViewTreeObserver viewTreeObserver = photoView.getViewTreeObserver();
+            viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    if (state_height == 0) {
+                        // 获取状况栏高度
+                        Rect frame = new Rect();
+                        getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);
+                        state_height = frame.top;
+                        photoView.setScreen_H(window_height - state_height);
+                        photoView.setScreen_W(window_width);
+                    }
+                }
+            });
             photoView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -132,30 +155,6 @@ public class GalleryActivity extends Activity {
             return view;
         }
 
-        class DownloadImageTask implements OnImageDownload {
-            @Override
-            public void onDownloadSucc(Bitmap bitmap, String c_url, ImageView imageView) {
-                LoadImageUtil.setImageScaleBySelf(imageView,bitmap,0.5f,0.5f);
-                        ((DragImageView) imageView).setmActivity(GalleryActivity.this);//注入Activity.
-                /** 测量状态栏高度 **/
-                ViewTreeObserver viewTreeObserver = imageView.getViewTreeObserver();
-                viewTreeObserver
-                        .addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-
-                            @Override
-                            public void onGlobalLayout() {
-                                if (state_height == 0) {
-                                    // 获取状况栏高度
-                                    Rect frame = new Rect();
-                                    getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);
-                                    state_height = frame.top;
-                                    ((DragImageView)imageView).setScreen_H(window_height - state_height);
-                                    ((DragImageView)imageView).setScreen_W(window_width);
-                                }
-                            }
-                        });
-            }
-        }
     }
 
     /**

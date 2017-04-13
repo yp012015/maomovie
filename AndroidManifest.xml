@@ -189,6 +189,9 @@
         <!-- Required. AppKey copied from Portal -->
         <meta-data android:name="JPUSH_APPKEY" android:value="12ead786c28c8ff5d17c787f"/>
 
+
+        <!--配置Glide的缓存路径-->
+        <meta-data android:name="com.maomovie.util.GlideCache" android:value="GlideModule"/>
     </application>
 
 </manifest>
