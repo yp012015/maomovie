@@ -39,11 +39,11 @@ public class DiscoverFragment extends Fragment implements OnClickListener{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		if (view == null) {
 			view = inflater.inflate(R.layout.fragment_discover,null);
-		} else if (view.getParent() != null) {
-			((ViewGroup) view.getParent()).removeAllViewsInLayout(); 
+			initView();// 控件初始化
+			loadData();//加载数据
+		} else if (view !=null && view.getParent() != null) {
+			((ViewGroup) view.getParent()).removeAllViewsInLayout();
 		}
-		initView();// 控件初始化
-		loadData();//加载数据
 		return view;
 	}
 

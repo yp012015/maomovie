@@ -64,15 +64,15 @@ public class MovieFragment extends Fragment implements View.OnClickListener , On
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (view == null) {
             view = inflater.inflate(R.layout.fragment_movie, null);
-        } else if (view.getParent() != null) {
+            initView();//初始化控件
+            //注册广播接收器
+            getActivity().registerReceiver(refreshCityRecevier, new IntentFilter("REFRESH_CITY"));
+        } else if (view !=null && view.getParent() != null) {
             ((ViewGroup) view.getParent()).removeAllViewsInLayout();
         }
         if(movieFragBiz == null){
             movieFragBiz = new MovieFragBizPresenter(this);
         }
-        initView();//初始化控件
-        //注册广播接收器
-        getActivity().registerReceiver(refreshCityRecevier, new IntentFilter("REFRESH_CITY"));
         return view;
     }
 

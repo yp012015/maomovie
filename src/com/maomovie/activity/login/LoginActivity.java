@@ -1,10 +1,12 @@
 package com.maomovie.activity.login;
 
+import android.app.ActivityManager;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -34,6 +36,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     public void onCreate() {
         setContentView(R.layout.activity_login);
         initView();//初始化控件
+//        watchHeap();
     }
 
     /**
@@ -126,6 +129,22 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         } else {
             loadingDialog.dismiss();
         }
+    }
+    
+    private void watchHeap(){
+    	ActivityManager manager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+    	StringBuffer sb =new StringBuffer();
+    	int memoryClass = manager.getMemoryClass();
+    	int largeMemoryClass = manager.getLargeMemoryClass();
+    	float total = Runtime.getRuntime().totalMemory() * 1.0f/(1024*1024);
+    	float free = Runtime.getRuntime().freeMemory() * 1.0f/(1024*1024);
+    	float max = Runtime.getRuntime().maxMemory() * 1.0f/(1024*1024);
+    	sb.append("memoryClass: " + memoryClass);
+    	sb.append("\nlargeMemoryClass: " + largeMemoryClass);
+    	sb.append("\ntotal: " + total);
+    	sb.append("\nfree: " + free);
+    	sb.append("\nmax: " + max);
+    	Log.i("Memory", sb.toString());
     }
 
     /**

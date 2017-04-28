@@ -38,12 +38,12 @@ public class UserFragment extends Fragment implements OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (view == null) {
             view = inflater.inflate(R.layout.fragment_user, null);
-        } else if (view.getParent() != null) {
+            context = getActivity();
+            // 控件初始化
+            setView();
+        } else if (view !=null && view.getParent() != null) {
             ((ViewGroup) view.getParent()).removeAllViewsInLayout();
         }
-        context = getActivity();
-        // 控件初始化
-        setView();
         return view;
     }
 
