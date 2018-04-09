@@ -6,123 +6,276 @@
                 android:fitsSystemWindows="true"
                 android:clipToPadding="false">
 
-    <RelativeLayout
-            android:id="@+id/titleBar"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/fragmentHeaderHeight"
-            android:background="@color/color_moviebtn_normal"
-            >
-
-        <ImageButton
-                android:id="@+id/btnBack"
-                android:layout_width="50dp"
-                android:layout_height="match_parent"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/back"
-                android:background="@drawable/bg_moviebtn"/>
-
-        <View
-                android:id="@+id/topLine"
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/fragment_header_footor_top_bottom_padding"
-                android:layout_marginBottom="@dimen/fragment_header_footor_top_bottom_padding"
-                android:background="@color/color_moviebtn_pressed"
-                android:layout_alignRight="@id/btnBack"
-                />
-
-        <TextView
-                android:id="@+id/tvTitle"
+        <RelativeLayout
+                android:id="@+id/titleBar"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="@dimen/fragmentHeaderHeight"
+                android:background="@color/color_moviebtn_normal"
+                >
+
+                <ImageButton
+                        android:id="@+id/btnBack"
+                        android:layout_width="50dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/back"
+                        android:background="@drawable/bg_moviebtn"/>
+
+                <View
+                        android:id="@+id/topLine"
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/fragment_header_footor_top_bottom_padding"
+                        android:layout_marginBottom="@dimen/fragment_header_footor_top_bottom_padding"
+                        android:background="@color/color_moviebtn_pressed"
+                        android:layout_alignRight="@id/btnBack"
+                        />
+
+                <TextView
+                        android:id="@+id/tvTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:layout_toRightOf="@id/topLine"
+                        android:text="卢米埃成都来福士影城"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:singleLine="true"/>
+        </RelativeLayout>
+
+        <TextView
+                android:id="@+id/tvMsg"
+                android:layout_below="@id/titleBar"
+                android:text="加载中……"
                 android:gravity="center"
-                android:layout_toRightOf="@id/topLine"
-                android:text="卢米埃成都来福士影城"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:singleLine="true"/>
-    </RelativeLayout>
+                android:layout_marginTop="140dp"
+                android:textColor="#888"
+                android:textSize="14sp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"/>
 
-    <LinearLayout
-            android:id="@+id/layShowMap"
-            android:layout_below="@id/titleBar"
-            android:layout_alignParentRight="true"
-            android:layout_width="40dp"
-            android:layout_height="60dp"
-            android:layout_margin="15dp"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:background="@drawable/txt_white_hologray_selector">
+        <ScrollView
+                android:id="@+id/scrollView"
+                android:layout_below="@id/titleBar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-        <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_cinema_address"/>
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="地图"
-                android:textColor="@color/gray"
-                android:textSize="12sp"
-                android:layout_marginTop="7dp"/>
+                        <RelativeLayout android:layout_width="match_parent"
+                                        android:layout_height="wrap_content">
+                                <LinearLayout
+                                        android:id="@+id/layShowMap"
+                                        android:layout_alignParentRight="true"
+                                        android:layout_width="40dp"
+                                        android:layout_height="60dp"
+                                        android:layout_margin="15dp"
+                                        android:orientation="vertical"
+                                        android:gravity="center"
+                                        android:background="@drawable/txt_white_hologray_selector">
+
+                                        <ImageView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:src="@drawable/ic_cinema_address"/>
+
+                                        <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:text="地图"
+                                                android:textColor="@color/gray"
+                                                android:textSize="12sp"
+                                                android:layout_marginTop="7dp"/>
 
 
-    </LinearLayout>
-    <View
-            android:id="@+id/lineMap"
-            android:layout_width="1px"
-            android:layout_height="60dp"
-            android:layout_toLeftOf="@id/layShowMap"
-            android:layout_alignTop="@+id/layShowMap"
-            android:background="@color/gray"
-            />
+                                </LinearLayout>
+                                <View
+                                        android:id="@+id/lineMap"
+                                        android:layout_width="1px"
+                                        android:layout_height="60dp"
+                                        android:layout_toLeftOf="@id/layShowMap"
+                                        android:layout_alignTop="@+id/layShowMap"
+                                        android:background="@color/gray"
+                                        />
 
-    <LinearLayout
-            android:id="@+id/layCinemaInfo"
-            android:layout_below="@id/titleBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:gravity="center_vertical"
-            android:orientation="vertical"
-            android:layout_toLeftOf="@id/lineMap"
-            >
+                                <LinearLayout
+                                        android:id="@+id/layCinemaInfo"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="15dp"
+                                        android:layout_marginBottom="10dp"
+                                        android:layout_marginLeft="10dp"
+                                        android:layout_marginRight="10dp"
+                                        android:gravity="center_vertical"
+                                        android:orientation="vertical"
+                                        android:layout_toLeftOf="@id/lineMap"
+                                        >
 
-        <TextView
-                android:id="@+id/tvCinemaName"
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:layout_gravity="center_vertical"
-                android:text="卢米埃成都来福士影城"
-                android:textSize="16sp"
-                />
-        <TextView
-                android:id="@+id/tvCinemaAddr"
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:layout_gravity="center_vertical"
-                android:text="成都武侯区人民南路四段3号来福士广场3层"
-                android:singleLine="true"
-                android:textSize="13sp"
-                android:textColor="@color/gray"
-                />
-        <TextView
-                android:id="@+id/tvCinemaTransfer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="3dp"
-                android:paddingRight="3dp"
-                android:textSize="10sp"
-                android:textColor="#579DAF"
-                android:maxLines="2"
-                />
+                                        <TextView
+                                                android:id="@+id/tvCinemaName"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="20dp"
+                                                android:layout_gravity="center_vertical"
+                                                android:text="卢米埃成都来福士影城"
+                                                android:textSize="16sp"
+                                                />
+                                        <TextView
+                                                android:id="@+id/tvCinemaAddr"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="20dp"
+                                                android:layout_gravity="center_vertical"
+                                                android:text="成都武侯区人民南路四段3号来福士广场3层"
+                                                android:singleLine="true"
+                                                android:textSize="13sp"
+                                                android:textColor="@color/gray"
+                                                />
+                                        <TextView
+                                                android:id="@+id/tvCinemaTransfer"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:paddingLeft="3dp"
+                                                android:paddingRight="3dp"
+                                                android:textSize="10sp"
+                                                android:textColor="#579DAF"
+                                                android:maxLines="2"
+                                                />
 
-    </LinearLayout>
+                                </LinearLayout>
+
+                        </RelativeLayout>
+
+                        <com.maomovie.view.HorizontalListView
+                                android:id="@+id/horizon_listview"
+                                android:layout_width="match_parent"
+                                android:layout_height="150dip"
+                                android:layout_centerVertical="true"
+                                android:background="@drawable/bg_movie_detail_up"
+                                >
+                        </com.maomovie.view.HorizontalListView>
+                        <RelativeLayout
+                                android:id="@+id/layMovieTitle"
+                                android:layout_below="@id/horizon_listview"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:gravity="center">
+
+                                <TextView
+                                        android:id="@+id/tvMovieName"
+                                        android:textSize="18sp"
+                                        android:gravity="center_vertical"
+                                        android:textColor="@color/black_gray"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="30dp"/>
+                                <TextView
+                                        android:id="@+id/tvScore"
+                                        android:text="暂无评分"
+                                        android:textColor="@color/score_color"
+                                        android:layout_toRightOf="@id/tvMovieName"
+                                        android:layout_marginLeft="10dp"
+                                        android:gravity="center_vertical"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="30dp"/>
+                        </RelativeLayout>
+                        <LinearLayout
+                                android:id="@+id/layMovieDetail"
+                                android:layout_below="@id/layMovieTitle"
+                                android:orientation="horizontal"
+                                android:gravity="center"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                        android:id="@+id/tvDuration"
+                                        android:text="加载中……"
+                                        android:textColor="@color/gray"
+                                        android:layout_marginRight="2dp"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"/>
+                        </LinearLayout>
+                        <View
+                                android:id="@+id/viewLine1"
+                                android:layout_below="@id/layMovieDetail"
+                                android:background="@color/gray"
+                                android:layout_width="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:layout_height="1px"/>
+                        <LinearLayout
+                                android:id="@+id/layDate"
+                                android:layout_below="@id/viewLine1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@color/hologray">
+                                <LinearLayout
+                                        android:id="@+id/layFirstDate"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="40dp"
+                                        android:orientation="vertical"
+                                        >
+
+                                        <TextView
+                                                android:id="@+id/tvFirstDate"
+                                                android:layout_width="120dp"
+                                                android:layout_height="0dp"
+                                                android:layout_weight="1"
+                                                android:textColor="@color/color_moviebtn_normal"
+                                                android:textSize="14sp"
+                                                android:gravity="center_vertical"
+                                                android:layout_marginLeft="20dp"/>
+
+                                        <View
+                                                android:id="@+id/lineFirst"
+                                                android:layout_width="120dp"
+                                                android:layout_height="3dp"
+                                                android:layout_marginLeft="10dp"
+                                                android:background="@color/color_moviebtn_normal"
+                                                />
+
+                                </LinearLayout>
+                                <LinearLayout
+                                        android:id="@+id/laySecondDate"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="40dp"
+                                        android:orientation="vertical"
+                                        >
+
+                                        <TextView
+                                                android:id="@+id/tvSecondDate"
+                                                android:layout_width="120dp"
+                                                android:layout_height="0dp"
+                                                android:layout_weight="1"
+                                                android:textColor="@color/black_gray"
+                                                android:textSize="14sp"
+                                                android:gravity="center_vertical"
+                                                android:layout_marginLeft="20dp"/>
+
+                                        <View
+                                                android:id="@+id/lineSecond"
+                                                android:layout_width="120dp"
+                                                android:layout_height="3dp"
+                                                android:layout_marginLeft="10dp"
+                                                android:background="@color/color_moviebtn_normal"
+                                                android:visibility="invisible"
+                                                />
+
+                                </LinearLayout>
+
+                        </LinearLayout>
+                        <LinearLayout
+                                android:id="@+id/layMovieTime"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                        </LinearLayout>
+                </LinearLayout>
+        </ScrollView>
+
+
 </RelativeLayout>

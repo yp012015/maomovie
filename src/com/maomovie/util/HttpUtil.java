@@ -13,7 +13,6 @@ import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.SingleClientConnManager;
-import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
@@ -175,15 +174,20 @@ public class HttpUtil {
     }
 
     /**
-     * 6.根据影院获取上映电影和场次
+     *  6.根据影院获取上映电影和场次
      * @param cinemaId  影院id
+     * @param movieId   电影id
      * @return
      */
-    public static Object getPlayingMoviesByCinemaId(int cinemaId){
-        String url = apiUrl + "/v1/cinema/{cinemaId}/movies/shows.json";
-        url = url.replace("{cinemaId}", String.valueOf(cinemaId));
+    public static Object getPlayingMoviesByCinemaId(int cinemaId,int movieId){
+        String url = apiUrl + "showtime/wrap.json";
+        Map<String, Object> params = new HashMap<String, Object>();// 请求参数
+        params.put("cinemaid",cinemaId);
+        if(movieId != -1){
+            params.put("movieid",movieId);
+        }
         try {
-            return net(url,null,"GET");
+            return net(url,params,"GET");
         } catch (Exception e) {
             e.printStackTrace();
             return e;

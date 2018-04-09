@@ -20,6 +20,10 @@
     <dimen name="fragment_header_footor_top_bottom_padding">10dp</dimen>
     <!--Fragment的页眉、页脚左右内边距-->
     <dimen name="fragment_header_footor_left_right_padding">10dp</dimen>
+    <!--水平ListView的图片缩率图默认宽度-->
+    <dimen name="thumnail_default_width">50dp</dimen>
+    <!--水平ListView的图片缩率图默认高度-->
+    <dimen name="thumnail_default_height">90dp</dimen>
 
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
@@ -34,5 +38,6 @@
     <dimen name="media_controller_view_height">48dip</dimen>
     <dimen name="media_controller_button_height">52dip</dimen>
     <dimen name="media_controller_button_width">71dip</dimen>
+
 
 </resources>

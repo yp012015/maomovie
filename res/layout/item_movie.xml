@@ -70,6 +70,7 @@
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
+                android:gravity="center"
                 >
             <TextView
                     android:id="@+id/state"
@@ -83,12 +84,14 @@
 
             <Button
                     android:id="@+id/btn_BuyTicket"
-                    android:layout_width="50dp"
-                    android:layout_height="25dp"
+                    android:layout_width="45dp"
+                    android:layout_height="23dp"
                     android:background="@drawable/btn_buyticket_bg"
                     android:textColor="@color/color_buyticketbtn"
                     android:text="购票"
                     android:textSize="12sp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
                     />
 
         </LinearLayout>

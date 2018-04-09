@@ -1,11 +1,12 @@
 package com.maomovie.service;
 
-import java.util.UUID;
-import java.util.Vector;
-
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Message;
+import org.json.JSONException;
+
+import java.util.UUID;
+import java.util.Vector;
 
 /**
  * 线程处理对象
@@ -49,7 +50,11 @@ public class ThreadHelper {
 				final Object result = threadHandler.run();
 				ThreadHelper.this.handler.post(new Runnable() {
 					public void run() {
-						threadHandler.result(result);
+						try {
+							threadHandler.result(result);
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
 					}
 				});
 			}

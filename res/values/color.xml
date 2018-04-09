@@ -26,6 +26,7 @@
     <color name="select_color">#00b2ff</color>
     <color name="normal_color">#ffffffff</color>
     <color name="divider_color">#55504a</color>
+    <color name="score_color">#ff9308</color>
     <!--special color-->
     <color name="black_a10_color">#1a000000</color>
 
